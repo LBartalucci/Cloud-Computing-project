@@ -21,7 +21,7 @@ For each anchor product it sums co-occurrence counts over all candidate products
 
 Output: Top N Ranking of the co-occurred products per product.
 
- */
+*/
 public final class Recommend {
 
     public static final String CONF_TOPN = "cc.topn";
@@ -92,11 +92,13 @@ public final class Recommend {
         }
     }
 
-    /* Now the local output goes on the custom partitioner,
+    /* 
+    Now the local output goes on the custom partitioner,
     to be sure that same anchor product lines are grouped to the same reducer.
     */
 
-    /* The reducer aggregates the values of the same co-occurred product counters and 
+    /* 
+    The reducer aggregates the values of the same co-occurred product counters and 
     select the top N and output them for each product
     */
 

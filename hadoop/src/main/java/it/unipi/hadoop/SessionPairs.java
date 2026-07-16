@@ -104,6 +104,13 @@ public final class SessionPairs {
         }
     }
 
+
+    /*
+    Note: A combiner is not used here because user sessions are mostly unique.
+    
+    Since there are almost no duplicate keys within the same data split, 
+    a combiner cannot reduce the data size. It would only waste RAM. 
+     */
     public static class PairReducer extends Reducer<Text, LongWritable, ProductPairWritable, IntWritable> {
 
         private static final IntWritable ONE = new IntWritable(1);
