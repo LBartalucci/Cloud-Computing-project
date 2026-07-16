@@ -104,11 +104,10 @@ public final class SessionPairs {
         }
     }
 
-    public static class PairReducer extends Reducer<Text, LongWritable, ProductPairWritable, IntWritable> {
-
-        private static final IntWritable ONE = new IntWritable(1);
-        private final ProductPairWritable outPair = new ProductPairWritable();
+    
+    public static class StripeReducer extends Reducer<Text, LongWritable, LongWritable, StripeWritable> {
         private int maxSessionSize;
+        private final LongWritable outAnchor = new LongWritable();
 
         @Override
         protected void setup(Context context) {
@@ -119,8 +118,6 @@ public final class SessionPairs {
         public void reduce(Text key, Iterable<LongWritable> values, Context context)
                 throws IOException, InterruptedException {
 
-
-            // Skip bot sessions
             Set<Long> distinct = new HashSet<>();
             for (LongWritable v : values) {
                 distinct.add(v.get());
@@ -130,19 +127,22 @@ public final class SessionPairs {
                 }
             }
 
-            // Keep only session with 2 or more products interacted with
-            if (distinct.size() < 2) {
-                return;
-            }
+            if (distinct.size() < 2) return;
 
-            // Output all the pairs 
             List<Long> products = new ArrayList<>(distinct);
-            for (int i = 0; i < products.size(); i++) {
-                for (int j = i + 1; j < products.size(); j++) {
-                    outPair.set(products.get(i), products.get(j));
-                    context.write(outPair, ONE);
+            
+            // Pattern Stripe for each anchor
+            for (Long anchor : products) {
+                StripeWritable stripe = new StripeWritable();
+                for (Long other : products) {
+                    if (!anchor.equals(other)) {
+                        stripe.add(other, 1L);
+                    }
                 }
+                outAnchor.set(anchor);
+                context.write(outAnchor, stripe);
             }
         }
+
     }
 }

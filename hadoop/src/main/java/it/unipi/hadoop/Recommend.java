@@ -22,87 +22,76 @@ For each anchor product it sums co-occurrence counts over all candidate products
 Output: Top N Ranking of the co-occurred products per product.
 
  */
-public final class Recommend {
 
+
+public final class Recommend {
     public static final String CONF_TOPN = "cc.topn";
 
-    private Recommend() {
-    }
-
-    public static class RecoMapper extends Mapper<LongWritable, Text, LongWritable, ProductCountWritable> {
-
-        private final LongWritable outKey = new LongWritable();
-        private final ProductCountWritable outVal = new ProductCountWritable();
+    public static class RecoMapper extends Mapper<LongWritable, Text, LongWritable, StripeWritable> {
+        // In-Mapper 
+        private Map<Long, StripeWritable> localAggregation;
+        private int recordsProcessed;
+        private static final int FLUSH_THRESHOLD = 10000;
 
         @Override
-        public void map(LongWritable key, Text value, Context context)
-                throws IOException, InterruptedException {
+        protected void setup(Context context) {
+            localAggregation = new HashMap<>();
+            recordsProcessed = 0;
+        }
 
-            // Removes bad lines
+        @Override
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String line = value.toString();
-            if (line.isEmpty()) {
-                return;
-            }
+            if (line.isEmpty()) return;
 
-            // Removes bad lines
-            String[] f = line.split("\t");
-            if (f.length != 3) {
-                context.getCounter("Recommend", "MALFORMED_PAIRS").increment(1);
-                return;
-            }
+            String[] fields = line.split("\t");
+            if (fields.length != 2) return;
 
-            // For each pair, keeps the anchor item as key and uses as value the pair "co-occured item, 1" and viceversa.
-            // So it duplicate the lines in input
             try {
-                long a = Long.parseLong(f[0].trim());
-                long b = Long.parseLong(f[1].trim());
-                long c = Long.parseLong(f[2].trim());
+                long anchor = Long.parseLong(fields[0].trim());
+                StripeWritable inputStripe = new StripeWritable();
+                
+                // Parsing
+                String[] items = fields[1].split(",");
+                for (String item : items) {
+                    String[] pc = item.split(":");
+                    inputStripe.add(Long.parseLong(pc[0]), Long.parseLong(pc[1]));
+                }
 
-                outKey.set(a);
-                outVal.set(b, c);
-                context.write(outKey, outVal);
+                // Local aggregation (combiner inside the mapper)
+                localAggregation.putIfAbsent(anchor, new StripeWritable());
+                localAggregation.get(anchor).merge(inputStripe);
+                recordsProcessed++;
 
-                outKey.set(b);
-                outVal.set(a, c);
-                context.write(outKey, outVal);
-            } catch (NumberFormatException e) {
-                context.getCounter("Recommend", "MALFORMED_PAIRS").increment(1);
+                if (recordsProcessed >= FLUSH_THRESHOLD) {
+                    flush(context);
+                }
+            } catch (Exception e) {
+                context.getCounter("Recommend", "MALFORMED_STRIPES").increment(1);
             }
         }
-    }
-
-    // The recombiner makes a local aggregation between the same lines 
-    public static class RecoCombiner
-            extends Reducer<LongWritable, ProductCountWritable, LongWritable, ProductCountWritable> {
-
-        private final ProductCountWritable outVal = new ProductCountWritable();
+        // Flushes local data periodically to avoid Out-Of-Memory.
+        private void flush(Context context) throws IOException, InterruptedException {
+            LongWritable outKey = new LongWritable();
+            for (Map.Entry<Long, StripeWritable> entry : localAggregation.entrySet()) {
+                outKey.set(entry.getKey());
+                context.write(outKey, entry.getValue());
+            }
+            localAggregation.clear();
+            recordsProcessed = 0;
+        }
 
         @Override
-        public void reduce(LongWritable key, Iterable<ProductCountWritable> values, Context context)
-                throws IOException, InterruptedException {
-
-            Map<Long, Long> sums = new HashMap<>();
-            for (ProductCountWritable v : values) {
-                sums.merge(v.getProduct(), v.getCount(), Long::sum);
-            }
-            for (Map.Entry<Long, Long> e : sums.entrySet()) {
-                outVal.set(e.getKey(), e.getValue());
-                context.write(key, outVal);
+        protected void cleanup(Context context) throws IOException, InterruptedException {
+            if (!localAggregation.isEmpty()) {
+                flush(context);
             }
         }
     }
 
-    /* Now the local output goes on the custom partitioner,
-    to be sure that same anchor product lines are grouped to the same reducer.
-    */
+    // Now the partitioner does his work by routing to same reducer same anchor product pairs
 
-    /* The reducer aggregates the values of the same co-occurred product counters and 
-    select the top N and output them for each product
-    */
-
-    public static class RecoReducer
-            extends Reducer<LongWritable, ProductCountWritable, LongWritable, Text> {
-
+    public static class RecoReducer extends Reducer<LongWritable, StripeWritable, LongWritable, Text> {
         private int topN;
         private final Text outVal = new Text();
 
@@ -112,34 +101,29 @@ public final class Recommend {
         }
 
         @Override
-        public void reduce(LongWritable key, Iterable<ProductCountWritable> values, Context context)
+        public void reduce(LongWritable key, Iterable<StripeWritable> values, Context context)
                 throws IOException, InterruptedException {
 
-            // Now it's the global sum for an anchor product, not the local made by the recombiner.
-            Map<Long, Long> sums = new HashMap<>();
-            for (ProductCountWritable v : values) {
-                sums.merge(v.getProduct(), v.getCount(), Long::sum);
+            StripeWritable finalStripe = new StripeWritable();
+            for (StripeWritable v : values) {
+                finalStripe.merge(v);
             }
 
-            // The min-heap keeps only the top-N highest counts.
+            // Min-Heap for Top-N
             PriorityQueue<long[]> heap = new PriorityQueue<>(
                     (x, y) -> x[1] != y[1] ? Long.compare(x[1], y[1]) : Long.compare(y[0], x[0]));
-            for (Map.Entry<Long, Long> e : sums.entrySet()) {
+            
+            for (Map.Entry<Long, Long> e : finalStripe.getStripe().entrySet()) {
                 heap.offer(new long[]{e.getKey(), e.getValue()});
-                if (heap.size() > topN) {
-                    heap.poll();
-                }
+                if (heap.size() > topN) heap.poll();
             }
 
-            // Output in descending order from high to low.
             java.util.ArrayList<long[]> ranked = new java.util.ArrayList<>(heap);
             ranked.sort((x, y) -> x[1] != y[1] ? Long.compare(y[1], x[1]) : Long.compare(x[0], y[0]));
 
             StringBuilder sb = new StringBuilder();
             for (long[] pc : ranked) {
-                if (sb.length() > 0) {
-                    sb.append(',');
-                }
+                if (sb.length() > 0) sb.append(',');
                 sb.append(pc[0]).append(':').append(pc[1]);
             }
             outVal.set(sb.toString());
