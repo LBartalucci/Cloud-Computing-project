@@ -1,57 +1,44 @@
 #!/usr/bin/env python3
-"""Non-parallel, single-process baseline for the co-occurrence recommender.
 
-Same logic as the Hadoop/Spark jobs, implemented with plain Python data
-structures on one machine. Used as the reference point in the experimental
-comparison (it does not scale: the whole co-occurrence map lives in RAM).
-
-Reads a local CSV file (not HDFS) and writes a single output file whose format
-matches the distributed jobs:  anchor<TAB>other1:count1,other2:count2,...
-
-Usage:
-  python reco_baseline.py <local_csv_in> <local_out> [event_types] [topN]
-
-Prints wall-clock time and peak RSS (on Linux) to stderr for benchmarking.
-"""
 import sys
 import time
 from collections import defaultdict
-from itertools import combinations
 
+# csv column indices
 IDX_EVENT_TYPE = 1
 IDX_PRODUCT_ID = 2
 IDX_USER_SESSION = 8
 MIN_FIELDS = 9
 MAX_SESSION_SIZE = 50
 
-
 def peak_rss_mb():
     try:
         import resource
-        # ru_maxrss is KB on Linux, bytes on macOS.
         kb = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
         return kb / 1024.0
     except Exception:
         return float("nan")
 
-
 def main():
     if len(sys.argv) < 3:
-        sys.stderr.write(__doc__)
+        sys.stderr.write("Usage: python reco_baseline.py <in> <out> [events] [topN]\n")
         return 2
-    in_path, out_path = sys.argv[1], sys.argv[2]
-    event_types = set(
-        t.strip().lower()
-        for t in (sys.argv[3] if len(sys.argv) > 3 else "cart,purchase").split(",")
-        if t.strip()
-    )
+
+    in_path = sys.argv[1]
+    out_path = sys.argv[2]
+    
+    raw_events = sys.argv[3] if len(sys.argv) > 3 else "cart,purchase"
+    event_types = {t.strip().lower() for t in raw_events.split(",") if t.strip()}
+    
     top_n = int(sys.argv[4]) if len(sys.argv) > 4 else 10
 
     t0 = time.time()
 
-    # Stage 1a: reconstruct session baskets (distinct products per session).
+    # stage 1a: read file and group distinct products by session
     sessions = defaultdict(set)
-    rows = kept = 0
+    rows = 0
+    kept = 0
+    
     with open(in_path, "r", encoding="utf-8", newline="") as f:
         first = True
         for line in f:
@@ -59,55 +46,65 @@ def main():
                 first = False
                 if line.startswith("event_time"):
                     continue
+            
             rows += 1
             fld = line.rstrip("\n").split(",")
+            
             if len(fld) < MIN_FIELDS:
                 continue
             if fld[IDX_EVENT_TYPE].strip().lower() not in event_types:
                 continue
+                
             session = fld[IDX_USER_SESSION].strip()
             prod = fld[IDX_PRODUCT_ID].strip()
+            
             if not session or not prod:
                 continue
+                
             try:
                 sessions[session].add(int(prod))
+                kept += 1
             except ValueError:
                 continue
-            kept += 1
+                
     t_parse = time.time()
 
-    # Stage 1b: enumerate co-occurring pairs and count sessions per pair.
-    pair_counts = defaultdict(int)
+    # stage 1b: build stripes (anchor -> {other: count})
+    stripes = defaultdict(lambda: defaultdict(int))
+    
     for prods in sessions.values():
-        n = len(prods)
+        unique_prods = sorted(list(prods))
+        n = len(unique_prods)
+        
+        # skip bot sessions or 1-item sessions
         if n < 2 or n > MAX_SESSION_SIZE:
             continue
-        for a, b in combinations(sorted(prods), 2):
-            pair_counts[(a, b)] += 1
-    t_pairs = time.time()
+            
+        for anchor in unique_prods:
+            for other in unique_prods:
+                if anchor != other:
+                    stripes[anchor][other] += 1
 
-    # Stage 2: both directions, then top-N per anchor.
-    anchor = defaultdict(list)
-    for (a, b), c in pair_counts.items():
-        anchor[a].append((b, c))
-        anchor[b].append((a, c))
+    t_stripes = time.time()
 
+    # stage 2: sort, get top N for each anchor, and write output
     with open(out_path, "w", encoding="utf-8") as out:
-        for a in sorted(anchor):
-            top = sorted(anchor[a], key=lambda x: (-x[1], x[0]))[:top_n]
-            out.write("%d\t%s\n" % (a, ",".join("%d:%d" % (o, c) for o, c in top)))
+        for anchor in sorted(stripes.keys()):
+            # sort by count desc, then by product id asc
+            recos = sorted(stripes[anchor].items(), key=lambda x: (-x[1], x[0]))[:top_n]
+            recos_str = ",".join(f"{other}:{count}" for other, count in recos)
+            out.write(f"{anchor}\t{recos_str}\n")
+            
     t_end = time.time()
 
     sys.stderr.write(
-        "[baseline] rows=%d kept_events=%d sessions=%d pairs=%d anchors=%d\n"
-        % (rows, kept, len(sessions), len(pair_counts), len(anchor))
+        f"[baseline] rows={rows} kept_events={kept} sessions={len(sessions)} anchors={len(stripes)}\n"
     )
     sys.stderr.write(
-        "[baseline] parse=%.1fs pairs=%.1fs rank+write=%.1fs TOTAL=%.1fs peakRSS=%.0fMB\n"
-        % (t_parse - t0, t_pairs - t_parse, t_end - t_pairs, t_end - t0, peak_rss_mb())
+        f"[baseline] parse={t_parse - t0:.1f}s stripes={t_stripes - t_parse:.1f}s rank+write={t_end - t_stripes:.1f}s TOTAL={t_end - t0:.1f}s peakRSS={peak_rss_mb():.0f}MB\n"
     )
+    
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())
