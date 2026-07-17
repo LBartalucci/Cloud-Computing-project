@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Configuration sweeps only (Experiments B and C), appended to the same results.
-# Kept separate so it can be run without redoing the scaling matrix.
+# Configuration sweeps only (Experiments B and C) on the IMC test repository.
 source /home/hadoop/cc_ops/hadoop-env.sh 2>/dev/null || true
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export SPARK_HOME=${SPARK_HOME:-/opt/spark}
@@ -12,24 +11,25 @@ SPARK_APP=/home/hadoop/cc_build/spark/reco_spark.py
 OUTBASE=/user/hadoop/ecommerce/bench
 RESULTS=${RESULTS:-/home/hadoop/cc_build/results/benchmark.csv}
 LOGDIR=/home/hadoop/cc_build/results/logs
+SCRIPT_DIR=/home/hadoop/cc_build/scripts
 mkdir -p "$(dirname "$RESULTS")" "$LOGDIR"
 IN1500=/user/hadoop/ecommerce/sizes/1500MB
 
 run_hadoop() {  # experiment reducers
   local exp=$1 red=$2
-  local out=$OUTBASE/h_1500_${red} log=$LOGDIR/h_1500_${red}.log
-  hdfs dfs -rm -r -f "$out" "${out}_stage1" >/dev/null 2>&1
+  local out=$OUTBASE/h_imc_1500_${red} log=$LOGDIR/h_imc_1500_${red}.log
   local t0 t1 wall rc cpu mem
   t0=$(date +%s.%N)
-  HADOOP_ROOT_LOGGER=INFO,console hadoop jar "$JAR" it.unipi.hadoop.RecoDriver \
-      -Dcc.event.types=cart,purchase -Dcc.topn=10 "$IN1500" "$out" "$red" > "$log" 2>&1
+  HADOOP_ROOT_LOGGER=INFO,console bash "$SCRIPT_DIR/run_hadoop.sh" \
+      "$IN1500" "$out" "$red" "cart,purchase" 10 > "$log" 2>&1
   rc=$?
   t1=$(date +%s.%N)
   wall=$(awk "BEGIN{printf \"%.1f\", $t1-$t0}")
   cpu=$(grep -a "CPU time spent (ms)" "$log" | awk -F= '{s+=$2} END{print s+0}')
   mem=$(grep -a "Physical memory (bytes) snapshot" "$log" | awk -F= '{if($2+0>m)m=$2} END{printf "%d", m/1048576}')
-  echo "$exp,hadoop,1500,reducers=$red,$wall,$cpu,$mem,,,,$rc" >> "$RESULTS"
-  echo "[done] hadoop exp=$exp size=1500 red=$red wall=${wall}s cpu=${cpu}ms mem=${mem}MB rc=$rc"
+  echo "$exp,hadoop_imc,1500,reducers=$red,$wall,$cpu,$mem,,,,$rc" >> "$RESULTS"
+  echo "[done] hadoop_imc exp=$exp size=1500 red=$red wall=${wall}s cpu=${cpu}ms mem=${mem}MB rc=$rc"
+  hdfs dfs -rm -r -f "$out" "${out}_stage1" >/dev/null 2>&1 || true
 }
 
 run_spark() {  # experiment partitions
@@ -46,10 +46,11 @@ run_spark() {  # experiment partitions
   wall=$(awk "BEGIN{printf \"%.1f\", $t1-$t0}")
   echo "$exp,spark,1500,parts=$parts,$wall,,,,,,$rc" >> "$RESULTS"
   echo "[done] spark exp=$exp size=1500 parts=$parts wall=${wall}s rc=$rc"
+  hdfs dfs -rm -r -f "$out" >/dev/null 2>&1 || true
 }
 
 echo "=== SWEEPS START $(date) ==="
-echo "--- Experiment B: hadoop reducers 1500MB ---"
+echo "--- Experiment B: hadoop_imc reducers 1500MB ---"
 for r in 1 2 4; do run_hadoop reducers "$r"; done
 echo "--- Experiment C: spark partitions 1500MB ---"
 for p in 2 4 8; do run_spark partitions "$p"; done
