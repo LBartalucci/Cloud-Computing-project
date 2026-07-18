@@ -35,7 +35,7 @@ def main():
     sc = SparkContext(conf=conf)
     sc.setLogLevel("WARN")
 
-    # broadcast valid events to all workers to save memory
+    # broadcast valid events to save memory
     bc_events = sc.broadcast(valid_events)
 
     def parse_row(line):
@@ -61,17 +61,16 @@ def main():
         except ValueError:
             return None
 
-    def get_pairs(products):
-        
-        # dedupe items in the session
-        unique_prods = sorted(list(set(products)))
+    def get_pairs(products_iterable):
+        # deduplicate inside session to prevent OOM and match baseline logic
+        unique_prods = sorted(list(set(products_iterable)))
         n = len(unique_prods)
 
-        # skip bot session or 1 item sessions
+        # filter out bots and single-item sessions
         if n < 2 or n > MAX_SESSION:
             return []
 
-        # generate all unique a<b combinations
+        # generate unique pairings (a < b)
         pairs = []
         for i in range(n):
             for j in range(i + 1, n):
@@ -87,27 +86,33 @@ def main():
     else:
         grouped_sessions = session_items.groupByKey()
 
-    # result: ((prodA, prodB), total_co_occurrences)
     pair_freq = grouped_sessions.flatMap(lambda kv: get_pairs(kv[1])).reduceByKey(add)
 
     # --- STAGE 2: top N recommendations ---
-    # expand pairs in both directions so each product is the anchor
+    # map to directed associations: (anchor, (neighbor, count))
     directed_pairs = pair_freq.flatMap(
         lambda kv: [(kv[0][0], (kv[0][1], kv[1])), (kv[0][1], (kv[0][0], kv[1]))]
     )
 
-    def extract_top_n(items):
-        # sort by frequency desct, then by product ID asc
-        return sorted(items, key=lambda x: (-x[1], x[0]))[:top_n]
+    # aggregate locally on workers before shuffling to optimize network I/O
+    def merge_value(current_top, new_item):
+        current_top.append(new_item)
+        current_top.sort(key=lambda x: (-x[1], x[0]))
+        return current_top[:top_n]
+
+    def merge_combiners(top_list1, top_list2):
+        combined = top_list1 + top_list2
+        combined.sort(key=lambda x: (-x[1], x[0]))
+        return combined[:top_n]
+
+    zero_value = []
 
     if num_parts:
-        anchors = directed_pairs.groupByKey(num_parts)
+        top_recos = directed_pairs.aggregateByKey(zero_value, merge_value, merge_combiners, num_partitions=num_parts)
     else:
-        anchors = directed_pairs.groupByKey()
+        top_recos = directed_pairs.aggregateByKey(zero_value, merge_value, merge_combiners)
 
-    top_recos = anchors.mapValues(lambda v: extract_top_n(list(v)))
-
-    # format like the hadoop output: anchor \t other1:count, other2:count...
+    # format output as: anchor \t other1:count,other2:count...
     def format_output(kv):
         anchor, recos = kv
         reco_str = ",".join(f"{other}:{count}" for other, count in recos)
