@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Command-line client for the recommender REST service.
+"""
+Command-line client for the recommender REST service.
 
 Submits a job, polls until it finishes, prints the timing/statistics, and
 optionally fetches the recommendations for a specific product.

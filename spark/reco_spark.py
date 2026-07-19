@@ -6,7 +6,7 @@ import sys
 from operator import add
 from pyspark import SparkConf, SparkContext
 
-# csv column indices
+# CSV column indices
 IDX_EVENT = 1
 IDX_PROD = 2
 IDX_SESSION = 8
@@ -21,13 +21,13 @@ def main():
     in_path = sys.argv[1]
     out_path = sys.argv[2]
 
-    # parse events
+    # Parse event types
     raw_events = sys.argv[3] if len(sys.argv) > 3 else "cart,purchase"
     valid_events = {e.strip().lower() for e in raw_events.split(",") if e.strip()}
 
     top_n = int(sys.argv[4]) if len(sys.argv) > 4 else 10
 
-    # handle partitions
+    # Handle explicit partitioning requests
     parts_arg = sys.argv[5] if len(sys.argv) > 5 else None
     num_parts = int(parts_arg) if parts_arg and parts_arg != "-" else None
 
@@ -35,7 +35,7 @@ def main():
     sc = SparkContext(conf=conf)
     sc.setLogLevel("WARN")
 
-    # broadcast valid events to save memory
+    # Broadcast valid events to optimize memory across worker executors
     bc_events = sc.broadcast(valid_events)
 
     def parse_row(line):
@@ -62,22 +62,22 @@ def main():
             return None
 
     def get_pairs(products_iterable):
-        # deduplicate inside session to prevent OOM and match baseline logic
+        # Deduplicate and sort inside session to match baseline and Hadoop pair logic
         unique_prods = sorted(list(set(products_iterable)))
         n = len(unique_prods)
 
-        # filter out bots and single-item sessions
+        # Apply safety threshold against bot sessions and skip single-item interactions
         if n < 2 or n > MAX_SESSION:
             return []
 
-        # generate unique pairings (a < b)
+        # Generate unique pairs ensuring deterministic (a < b) key structuring
         pairs = []
         for i in range(n):
             for j in range(i + 1, n):
                 pairs.append(((unique_prods[i], unique_prods[j]), 1))
         return pairs
 
-    # --- STAGE 1: session pairs ---
+    # --- STAGE 1: Session pairs generation ---
     raw_data = sc.textFile(in_path)
     session_items = raw_data.map(parse_row).filter(lambda x: x is not None)
 
@@ -88,20 +88,21 @@ def main():
 
     pair_freq = grouped_sessions.flatMap(lambda kv: get_pairs(kv[1])).reduceByKey(add)
 
-    # --- STAGE 2: top N recommendations ---
-    # map to directed associations: (anchor, (neighbor, count))
+    # --- STAGE 2: Top-N recommendation ranking ---
+    # Map to symmetric directional relationships: (anchor, (candidate, count))
     directed_pairs = pair_freq.flatMap(
         lambda kv: [(kv[0][0], (kv[0][1], kv[1])), (kv[0][1], (kv[0][0], kv[1]))]
     )
 
-    # aggregate locally on workers before shuffling to optimize network I/O
+    # Standardize pure functions for aggregateByKey to avoid shared-mutable-state side effects.
+    # We always generate a fresh list copy to preserve partition buffer isolation.
     def merge_value(current_top, new_item):
-        current_top.append(new_item)
-        current_top.sort(key=lambda x: (-x[1], x[0]))
-        return current_top[:top_n]
+        updated_list = list(current_top) + [new_item]
+        updated_list.sort(key=lambda x: (-x[1], x[0]))
+        return updated_list[:top_n]
 
     def merge_combiners(top_list1, top_list2):
-        combined = top_list1 + top_list2
+        combined = list(top_list1) + list(top_list2)
         combined.sort(key=lambda x: (-x[1], x[0]))
         return combined[:top_n]
 
@@ -112,7 +113,7 @@ def main():
     else:
         top_recos = directed_pairs.aggregateByKey(zero_value, merge_value, merge_combiners)
 
-    # format output as: anchor \t other1:count,other2:count...
+    # Format output matching the project specifications: anchor \t other1:count,other2:count...
     def format_output(kv):
         anchor, recos = kv
         reco_str = ",".join(f"{other}:{count}" for other, count in recos)

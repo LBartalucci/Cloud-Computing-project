@@ -1,10 +1,8 @@
-"""Containerized REST server for the e-commerce co-occurrence recommender.
+"""
+Containerized REST server for the e-commerce co-occurrence recommender.
 
 Acts as the intermediate layer between the client and the Hadoop/Spark cluster.
-Jobs are submitted asynchronously: POST /jobs returns a job_id immediately and a
-background worker drives the cluster; GET /jobs/{id} polls status, timing and
-parsed statistics; GET /jobs/{id}/recommendations/{product} returns the top-N
-co-occurring products once the job has succeeded.
+Jobs are submitted asynchronously and driven by a background worker thread.
 """
 import os
 import re
@@ -21,6 +19,7 @@ app = Flask(__name__)
 JOBS = {}
 LOCK = threading.Lock()
 
+# regex patterns used to parse performance metrics and processing statistics from the stdout 
 WALL_RE = re.compile(r"wall-clock:\s*(\d+)s")
 BASE_TOTAL_RE = re.compile(r"TOTAL=([\d.]+)s")
 BASE_RSS_RE = re.compile(r"peakRSS=(\d+)MB")
@@ -56,12 +55,13 @@ def _worker(job_id):
             job["engine"], job["dataset"], job["output"],
             job["event_types"], job["topn"], job["reducers"])
         job["command"] = cmd
+        # Executes the shell command via SSH gateway in a blocking manner
         rc, out = cluster.run_blocking(cmd, as_hadoop=True)
         job["exit_code"] = rc
         job["log"] = out[-20000:]
         job["stats"] = _parse_stats(job["engine"], out)
         job["state"] = "SUCCEEDED" if rc == 0 else "FAILED"
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         job["state"] = "FAILED"
         job["error"] = str(exc)
     finally:
@@ -144,6 +144,7 @@ def recommendations(job_id, product):
     if job["state"] != "SUCCEEDED":
         return jsonify(error="job not finished", state=job["state"]), 409
     limit = int(request.args.get("limit", job["topn"]))
+    # Fetches the raw recommendation results 
     recs = cluster.fetch_recommendations(job["engine"], job["output"], product, limit)
     if recs is None:
         return jsonify(product=product, recommendations=[],

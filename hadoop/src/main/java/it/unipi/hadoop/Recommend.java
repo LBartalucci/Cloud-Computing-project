@@ -45,7 +45,7 @@ public final class Recommend {
             // Standard Hadoop outputs separate the Key and Value with a tab.
             // The Key (ProductPairWritable) contains two fields separated by a comma (or space/tab).
             // Splitting by either tabs or commas ensures robust parsing of "prodA,prodB\tcount".
-            String[] f = line.split("[\t,]");
+            String[] f = line.split("\t");
             if (f.length < 3) {
                 context.getCounter("Recommend", "MALFORMED_PAIRS").increment(1);
                 return;
