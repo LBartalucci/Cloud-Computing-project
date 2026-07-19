@@ -1,0 +1,179 @@
+2026-07-19 23:30:19,930 INFO spark.SparkContext: Running Spark version 3.4.4
+2026-07-19 23:30:20,257 INFO resource.ResourceUtils: ==============================================================
+2026-07-19 23:30:20,258 INFO resource.ResourceUtils: No custom resources configured for spark.driver.
+2026-07-19 23:30:20,258 INFO resource.ResourceUtils: ==============================================================
+2026-07-19 23:30:20,259 INFO spark.SparkContext: Submitted application: reco-spark-job
+2026-07-19 23:30:20,295 INFO resource.ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 512, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+2026-07-19 23:30:20,314 INFO resource.ResourceProfile: Limiting resource is cpus at 1 tasks per executor
+2026-07-19 23:30:20,317 INFO resource.ResourceProfileManager: Added ResourceProfile id: 0
+2026-07-19 23:30:20,409 INFO spark.SecurityManager: Changing view acls to: hadoop
+2026-07-19 23:30:20,410 INFO spark.SecurityManager: Changing modify acls to: hadoop
+2026-07-19 23:30:20,410 INFO spark.SecurityManager: Changing view acls groups to: 
+2026-07-19 23:30:20,411 INFO spark.SecurityManager: Changing modify acls groups to: 
+2026-07-19 23:30:20,411 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
+2026-07-19 23:30:20,765 INFO util.Utils: Successfully started service 'sparkDriver' on port 43399.
+2026-07-19 23:30:20,810 INFO spark.SparkEnv: Registering MapOutputTracker
+2026-07-19 23:30:20,859 INFO spark.SparkEnv: Registering BlockManagerMaster
+2026-07-19 23:30:20,893 INFO storage.BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+2026-07-19 23:30:20,894 INFO storage.BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+2026-07-19 23:30:20,943 INFO spark.SparkEnv: Registering BlockManagerMasterHeartbeat
+2026-07-19 23:30:20,976 INFO storage.DiskBlockManager: Created local directory at /tmp/blockmgr-e69aa995-9494-4d35-b82c-268cd17167e3
+2026-07-19 23:30:21,001 INFO memory.MemoryStore: MemoryStore started with capacity 366.3 MiB
+2026-07-19 23:30:21,061 INFO spark.SparkEnv: Registering OutputCommitCoordinator
+2026-07-19 23:30:21,122 INFO util.log: Logging initialized @3758ms to org.sparkproject.jetty.util.log.Slf4jLog
+2026-07-19 23:30:21,266 INFO ui.JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+2026-07-19 23:30:21,286 INFO server.Server: jetty-9.4.54.v20240208; built: 2024-02-08T19:42:39.027Z; git: cef3fbd6d736a21e7d541a5db490381d95a2047d; jvm 1.8.0_492-8u492-ga~us2-0ubuntu1~22.04.1-b09
+2026-07-19 23:30:21,314 INFO server.Server: Started @3952ms
+2026-07-19 23:30:21,367 INFO server.AbstractConnector: Started ServerConnector@6b9bdbd{HTTP/1.1, (http/1.1)}{0.0.0.0:4040}
+2026-07-19 23:30:21,367 INFO util.Utils: Successfully started service 'SparkUI' on port 4040.
+2026-07-19 23:30:21,513 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6937f66a{/,null,AVAILABLE,@Spark}
+2026-07-19 23:30:22,529 INFO client.RMProxy: Connecting to ResourceManager at hadoop-namenode/10.1.1.156:8032
+2026-07-19 23:30:24,088 INFO conf.Configuration: resource-types.xml not found
+2026-07-19 23:30:24,089 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-07-19 23:30:24,122 INFO yarn.Client: Verifying our application has not requested more than the maximum memory capability of the cluster (1536 MB per container)
+2026-07-19 23:30:24,123 INFO yarn.Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+2026-07-19 23:30:24,123 INFO yarn.Client: Setting up container launch context for our AM
+2026-07-19 23:30:24,126 INFO yarn.Client: Setting up the launch environment for our AM container
+2026-07-19 23:30:24,139 INFO yarn.Client: Preparing resources for our AM container
+2026-07-19 23:30:24,197 WARN yarn.Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+2026-07-19 23:30:25,858 INFO yarn.Client: Uploading resource file:/tmp/spark-eb5c669e-df99-4a79-9439-645aa2f19ddf/__spark_libs__3246093084749686619.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0092/__spark_libs__3246093084749686619.zip
+2026-07-19 23:30:26,058 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-19 23:30:26,998 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-19 23:30:27,579 INFO yarn.Client: Uploading resource file:/opt/spark-3.4.4-bin-without-hadoop/python/lib/pyspark.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0092/pyspark.zip
+2026-07-19 23:30:27,597 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-19 23:30:27,649 INFO yarn.Client: Uploading resource file:/opt/spark-3.4.4-bin-without-hadoop/python/lib/py4j-0.10.9.7-src.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0092/py4j-0.10.9.7-src.zip
+2026-07-19 23:30:27,658 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-19 23:30:27,866 INFO yarn.Client: Uploading resource file:/tmp/spark-eb5c669e-df99-4a79-9439-645aa2f19ddf/__spark_conf__1209032341661552432.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0092/__spark_conf__.zip
+2026-07-19 23:30:28,023 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-19 23:30:28,074 INFO spark.SecurityManager: Changing view acls to: hadoop
+2026-07-19 23:30:28,074 INFO spark.SecurityManager: Changing modify acls to: hadoop
+2026-07-19 23:30:28,074 INFO spark.SecurityManager: Changing view acls groups to: 
+2026-07-19 23:30:28,074 INFO spark.SecurityManager: Changing modify acls groups to: 
+2026-07-19 23:30:28,074 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
+2026-07-19 23:30:28,109 INFO yarn.Client: Submitting application application_1779436164025_0092 to ResourceManager
+2026-07-19 23:30:28,330 INFO impl.YarnClientImpl: Submitted application application_1779436164025_0092
+2026-07-19 23:30:29,339 INFO yarn.Client: Application report for application_1779436164025_0092 (state: ACCEPTED)
+2026-07-19 23:30:29,348 INFO yarn.Client: 
+	 client token: N/A
+	 diagnostics: AM container is launched, waiting for AM container to Register with RM
+	 ApplicationMaster host: N/A
+	 ApplicationMaster RPC port: -1
+	 queue: default
+	 start time: 1784503828136
+	 final status: UNDEFINED
+	 tracking URL: http://hadoop-namenode:8088/proxy/application_1779436164025_0092/
+	 user: hadoop
+2026-07-19 23:30:30,352 INFO yarn.Client: Application report for application_1779436164025_0092 (state: ACCEPTED)
+2026-07-19 23:30:31,359 INFO yarn.Client: Application report for application_1779436164025_0092 (state: ACCEPTED)
+2026-07-19 23:30:32,364 INFO yarn.Client: Application report for application_1779436164025_0092 (state: ACCEPTED)
+2026-07-19 23:30:33,367 INFO yarn.Client: Application report for application_1779436164025_0092 (state: ACCEPTED)
+2026-07-19 23:30:34,370 INFO yarn.Client: Application report for application_1779436164025_0092 (state: ACCEPTED)
+2026-07-19 23:30:35,238 INFO cluster.YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> hadoop-namenode, PROXY_URI_BASES -> http://hadoop-namenode:8088/proxy/application_1779436164025_0092), /proxy/application_1779436164025_0092
+2026-07-19 23:30:35,373 INFO yarn.Client: Application report for application_1779436164025_0092 (state: RUNNING)
+2026-07-19 23:30:35,374 INFO yarn.Client: 
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 10.1.1.150
+	 ApplicationMaster RPC port: -1
+	 queue: default
+	 start time: 1784503828136
+	 final status: UNDEFINED
+	 tracking URL: http://hadoop-namenode:8088/proxy/application_1779436164025_0092/
+	 user: hadoop
+2026-07-19 23:30:35,380 INFO cluster.YarnClientSchedulerBackend: Application application_1779436164025_0092 has started running.
+2026-07-19 23:30:35,409 INFO util.Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 35139.
+2026-07-19 23:30:35,409 INFO netty.NettyBlockTransferService: Server created on hadoop-namenode:35139
+2026-07-19 23:30:35,412 INFO storage.BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+2026-07-19 23:30:35,426 INFO storage.BlockManagerMaster: Registering BlockManager BlockManagerId(driver, hadoop-namenode, 35139, None)
+2026-07-19 23:30:35,432 INFO storage.BlockManagerMasterEndpoint: Registering block manager hadoop-namenode:35139 with 366.3 MiB RAM, BlockManagerId(driver, hadoop-namenode, 35139, None)
+2026-07-19 23:30:35,437 INFO storage.BlockManagerMaster: Registered BlockManager BlockManagerId(driver, hadoop-namenode, 35139, None)
+2026-07-19 23:30:35,438 INFO storage.BlockManager: Initialized BlockManager: BlockManagerId(driver, hadoop-namenode, 35139, None)
+2026-07-19 23:30:35,759 INFO handler.ContextHandler: Stopped o.s.j.s.ServletContextHandler@6937f66a{/,null,STOPPED,@Spark}
+2026-07-19 23:30:35,762 INFO ui.ServerInfo: Adding filter to /jobs: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,771 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@222cfa85{/jobs,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,772 INFO ui.ServerInfo: Adding filter to /jobs/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,773 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@35c186a1{/jobs/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,774 INFO ui.ServerInfo: Adding filter to /jobs/job: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,776 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3b095240{/jobs/job,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,776 INFO ui.ServerInfo: Adding filter to /jobs/job/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,777 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@550cd95e{/jobs/job/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,778 INFO ui.ServerInfo: Adding filter to /stages: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,784 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@40b73409{/stages,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,785 INFO ui.ServerInfo: Adding filter to /stages/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,786 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@42c2b754{/stages/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,787 INFO ui.ServerInfo: Adding filter to /stages/stage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,790 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@b21818f{/stages/stage,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,790 INFO ui.ServerInfo: Adding filter to /stages/stage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,796 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@7ddc09ba{/stages/stage/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,797 INFO ui.ServerInfo: Adding filter to /stages/pool: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,798 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6c4cb55{/stages/pool,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,798 INFO ui.ServerInfo: Adding filter to /stages/pool/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,801 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@15fdf9af{/stages/pool/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,802 INFO ui.ServerInfo: Adding filter to /storage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,805 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@1d588f40{/storage,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,805 INFO ui.ServerInfo: Adding filter to /storage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,806 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@2f6ce579{/storage/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,807 INFO ui.ServerInfo: Adding filter to /storage/rdd: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,807 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@255c93a0{/storage/rdd,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,808 INFO ui.ServerInfo: Adding filter to /storage/rdd/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,808 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@4c40b12c{/storage/rdd/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,809 INFO ui.ServerInfo: Adding filter to /environment: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,810 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@4e99bb7f{/environment,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,810 INFO ui.ServerInfo: Adding filter to /environment/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,827 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@289222dd{/environment/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,827 INFO ui.ServerInfo: Adding filter to /executors: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,832 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@57007673{/executors,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,833 INFO ui.ServerInfo: Adding filter to /executors/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,834 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@2b1961e3{/executors/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,835 INFO ui.ServerInfo: Adding filter to /executors/threadDump: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,836 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@7b10d4f5{/executors/threadDump,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,839 INFO ui.ServerInfo: Adding filter to /executors/threadDump/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,841 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6999d45f{/executors/threadDump/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,841 INFO ui.ServerInfo: Adding filter to /static: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,859 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@5903fe7c{/static,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,860 INFO ui.ServerInfo: Adding filter to /: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,863 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@35e7294a{/,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,863 INFO ui.ServerInfo: Adding filter to /api: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,868 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6c83af02{/api,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,869 INFO ui.ServerInfo: Adding filter to /jobs/job/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,872 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@10464c69{/jobs/job/kill,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,873 INFO ui.ServerInfo: Adding filter to /stages/stage/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,874 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@15e52130{/stages/stage/kill,null,AVAILABLE,@Spark}
+2026-07-19 23:30:35,881 INFO ui.ServerInfo: Adding filter to /metrics/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-19 23:30:35,882 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3dd64003{/metrics/json,null,AVAILABLE,@Spark}
+2026-07-19 23:30:36,279 INFO cluster.YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
+2026-07-19 23:30:44,948 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (10.1.1.156:37244) with ID 1,  ResourceProfileId 0
+2026-07-19 23:30:45,160 INFO storage.BlockManagerMasterEndpoint: Registering block manager hadoop-namenode:32991 with 93.3 MiB RAM, BlockManagerId(1, hadoop-namenode, 32991, None)
+2026-07-19 23:30:52,209 INFO cluster.YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after waiting maxRegisteredResourcesWaitingTime: 30000000000(ns)
+2026-07-19 23:30:52,444 INFO memory.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 312.0 B, free 366.3 MiB)
+2026-07-19 23:30:52,499 INFO memory.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 227.0 B, free 366.3 MiB)
+2026-07-19 23:30:52,502 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on hadoop-namenode:35139 (size: 227.0 B, free: 366.3 MiB)
+2026-07-19 23:30:52,511 INFO spark.SparkContext: Created broadcast 0 from broadcast at NativeMethodAccessorImpl.java:0
+2026-07-19 23:30:53,177 INFO memory.MemoryStore: Block broadcast_1 stored as values in memory (estimated size 389.2 KiB, free 365.9 MiB)
+2026-07-19 23:30:53,214 INFO memory.MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 40.4 KiB, free 365.9 MiB)
+2026-07-19 23:30:53,216 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on hadoop-namenode:35139 (size: 40.4 KiB, free: 366.3 MiB)
+2026-07-19 23:30:53,217 INFO spark.SparkContext: Created broadcast 1 from textFile at NativeMethodAccessorImpl.java:0
+Traceback (most recent call last):
+  File "/home/hadoop/cc_build/spark/reco_spark.py", line 126, in <module>
+    main()
+  File "/home/hadoop/cc_build/spark/reco_spark.py", line 112, in main
+    top_recos = directed_pairs.aggregateByKey(zero_value, merge_value, merge_combiners, num_partitions=num_parts)
+TypeError: RDD.aggregateByKey() got an unexpected keyword argument 'num_partitions'
+2026-07-19 23:30:53,622 INFO spark.SparkContext: Invoking stop() from shutdown hook
+2026-07-19 23:30:53,625 INFO spark.SparkContext: SparkContext is stopping with exitCode 0.
+2026-07-19 23:30:53,638 INFO server.AbstractConnector: Stopped Spark@6b9bdbd{HTTP/1.1, (http/1.1)}{0.0.0.0:4040}
+2026-07-19 23:30:53,642 INFO ui.SparkUI: Stopped Spark web UI at http://hadoop-namenode:4040
+2026-07-19 23:30:53,655 INFO cluster.YarnClientSchedulerBackend: Interrupting monitor thread
+2026-07-19 23:30:53,732 INFO cluster.YarnClientSchedulerBackend: Shutting down all executors
+2026-07-19 23:30:53,735 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Asking each executor to shut down
+2026-07-19 23:30:53,758 INFO cluster.YarnClientSchedulerBackend: YARN client scheduler backend Stopped
+2026-07-19 23:30:53,774 INFO spark.MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+2026-07-19 23:30:53,827 INFO memory.MemoryStore: MemoryStore cleared
+2026-07-19 23:30:53,828 INFO storage.BlockManager: BlockManager stopped
+2026-07-19 23:30:53,856 INFO storage.BlockManagerMaster: BlockManagerMaster stopped
+2026-07-19 23:30:53,862 INFO scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+2026-07-19 23:30:53,882 INFO spark.SparkContext: Successfully stopped SparkContext
+2026-07-19 23:30:53,883 INFO util.ShutdownHookManager: Shutdown hook called
+2026-07-19 23:30:53,883 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-89f0ac51-f157-4bab-b00e-cff9ace503ca
+2026-07-19 23:30:53,889 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-eb5c669e-df99-4a79-9439-645aa2f19ddf/pyspark-8b38ddae-78dd-45eb-a17d-c7f9f652933f
+2026-07-19 23:30:53,894 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-eb5c669e-df99-4a79-9439-645aa2f19ddf

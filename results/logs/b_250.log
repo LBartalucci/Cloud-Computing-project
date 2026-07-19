@@ -1,0 +1,2 @@
+[baseline] rows=1962872 kept_events=62265 sessions=35929 pairs=3716 anchors=2278
+[baseline] parse=4.0s pairs=0.0s rank+write=0.0s TOTAL=4.0s peakRSS=24MB
