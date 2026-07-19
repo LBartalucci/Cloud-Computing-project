@@ -9,19 +9,20 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/*
+/**
+ * Job 1 — Session co-occurrence generation.
+ *
+ * Map: Inputs REES46 CSV rows, filters by configured event types and outputs (user_session -> product_id).
+ * Reduce: Groups by session, extracts distinct products, sorts them to ensure deterministic pair generation,
+ *         and emits (ProductPairWritable -> 1) for each unique pair.
+ *         Sessions exceeding the maximum size threshold are skipped to filter out bot traffic.
+ */
 
-Job 1 — Session co-occurrence generation.
-
-Map: input REES46 rows, keep configured event types, then output (user_session -> product_id).
-Reducer: per session, dedupe products and emit {(ProductPair -> 1)} for each unordered pair. 
-Sessions larger than {cc.max.session.size} are skipped to avoid bot sessions.
-
-*/
 public final class SessionPairs {
 
     public static final String CONF_EVENT_TYPES = "cc.event.types";
@@ -41,7 +42,6 @@ public final class SessionPairs {
         private final LongWritable outProduct = new LongWritable();
         private final Set<String> eventTypes = new HashSet<>();
 
-        // event_types selected: cart, purhcase 
         @Override
         protected void setup(Context context) {
             Configuration conf = context.getConfiguration();
@@ -54,7 +54,6 @@ public final class SessionPairs {
             }
         }
 
-
         @Override
         public void map(LongWritable key, Text value, Context context)
                 throws IOException, InterruptedException {
@@ -64,31 +63,30 @@ public final class SessionPairs {
                 return;
             }
 
-            // Skip the header
+            // Skip the CSV header row
             if (line.startsWith("event_time")) {
                 return;
             }
 
-            // Skip bad lines
+            // Skip malformed rows
             String[] f = line.split(",", -1);
             if (f.length < MIN_FIELDS) {
                 context.getCounter("SessionPairs", "MALFORMED_ROWS").increment(1);
                 return;
             }
 
-            // Skip lines with other events
+            // Filter out unwanted event types
             String eventType = f[IDX_EVENT_TYPE].trim().toLowerCase();
             if (!eventTypes.contains(eventType)) {
                 return;
             }
 
-            // Skip lines without session or products id
+            // Skip records missing critical identifiers
             String session = f[IDX_USER_SESSION].trim();
             String productStr = f[IDX_PRODUCT_ID].trim();
             if (session.isEmpty() || productStr.isEmpty()) {
                 return;
             }
-
 
             long product;
             try {
@@ -104,12 +102,10 @@ public final class SessionPairs {
         }
     }
 
-
-    /*
-    Note: A combiner is not used here because user sessions are mostly unique.
-    
-    Since there are almost no duplicate keys within the same data split, 
-    a combiner cannot reduce the data size. It would only waste RAM. 
+    /**
+     * Note: A Combiner is explicitly omitted in Job 1 because user sessions are mostly unique.
+     * Since there are no duplicate keys within the same input split, a Combiner
+     * would introduce CPU and RAM overhead without reducing the shuffle data volume.
      */
     public static class PairReducer extends Reducer<Text, LongWritable, ProductPairWritable, IntWritable> {
 
@@ -126,8 +122,7 @@ public final class SessionPairs {
         public void reduce(Text key, Iterable<LongWritable> values, Context context)
                 throws IOException, InterruptedException {
 
-
-            // Skip bot sessions
+            // Extract unique products while enforcing the bot-filtering threshold
             Set<Long> distinct = new HashSet<>();
             for (LongWritable v : values) {
                 distinct.add(v.get());
@@ -137,13 +132,17 @@ public final class SessionPairs {
                 }
             }
 
-            // Keep only session with 2 or more products interacted with
+            // A valid co-occurrence requires at least two distinct products
             if (distinct.size() < 2) {
                 return;
             }
 
-            // Output all the pairs 
+            // Convert to a List and sort explicitly. This guarantees that pairs are always generated 
+            // in a strict, ascending numerical order, ensuring consistency with the Python baseline.
             List<Long> products = new ArrayList<>(distinct);
+            Collections.sort(products);
+
+            // Generate and emit all unique combinations
             for (int i = 0; i < products.size(); i++) {
                 for (int j = i + 1; j < products.size(); j++) {
                     outPair.set(products.get(i), products.get(j));

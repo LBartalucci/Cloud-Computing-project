@@ -13,13 +13,13 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-/*
-Main Driver: Job 1 (SessionPairs) -> Job 2 (Recommend).
-
- 
-The output of Job 1 is written to <output>_stage1 and used as the input of Job 2, 
-which writes the final output to <output>.
-*/
+/**
+ * Main Driver: Orchestrates the execution of Job 1 (SessionPairs) and Job 2 (Recommend).
+ * 
+ * Job 1 extracts session co-occurrences and writes intermediate results to <output>_stage1.
+ * Job 2 processes the intermediate output to aggregate scores and extract the top-N recommendations,
+ * saving the final result to the designated <output> path.
+ */
 
 public class RecoDriver extends Configured implements Tool {
 
@@ -37,6 +37,8 @@ public class RecoDriver extends Configured implements Tool {
         int numReducers = args.length >= 3 ? Integer.parseInt(args[2]) : 2;
 
         FileSystem fs = FileSystem.get(conf);
+        
+        // Pre-clean existing output directories to prevent HDFS deployment failures
         fs.delete(stage1, true);
         fs.delete(output, true);
 
@@ -45,6 +47,10 @@ public class RecoDriver extends Configured implements Tool {
         job1.setJarByClass(RecoDriver.class);
         job1.setMapperClass(SessionPairs.PairMapper.class);
         job1.setReducerClass(SessionPairs.PairReducer.class);
+        
+        // Enable parallel execution for Job 1 to prevent single-reducer bottleneck
+        job1.setNumReduceTasks(numReducers);
+        
         job1.setMapOutputKeyClass(Text.class);
         job1.setMapOutputValueClass(LongWritable.class);
         job1.setOutputKeyClass(ProductPairWritable.class);
@@ -64,7 +70,9 @@ public class RecoDriver extends Configured implements Tool {
         job2.setCombinerClass(Recommend.RecoCombiner.class);
         job2.setPartitionerClass(AnchorPartitioner.class);
         job2.setReducerClass(Recommend.RecoReducer.class);
+        
         job2.setNumReduceTasks(numReducers);
+        
         job2.setMapOutputKeyClass(LongWritable.class);
         job2.setMapOutputValueClass(ProductCountWritable.class);
         job2.setOutputKeyClass(LongWritable.class);
@@ -74,6 +82,7 @@ public class RecoDriver extends Configured implements Tool {
 
         boolean ok = job2.waitForCompletion(true);
 
+        // Clean up intermediate data if configuration allows it
         if (ok && !conf.getBoolean("cc.keep.intermediate", false)) {
             fs.delete(stage1, true);
         }

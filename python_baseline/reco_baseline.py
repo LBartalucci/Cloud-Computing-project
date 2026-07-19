@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Non-parallel, single-process baseline for the co-occurrence recommender.
+"""
+Non-parallel, single-process baseline for the co-occurrence recommender.
 
-Same logic as the Hadoop/Spark jobs, implemented with plain Python data
+Same logic as the Hadoop/Spark jobs, implemented with simple Python data
 structures on one machine. Used as the reference point in the experimental
-comparison (it does not scale: the whole co-occurrence map lives in RAM).
+comparison (does not scale: the whole co-occurrence map lives in RAM).
 
 Reads a local CSV file (not HDFS) and writes a single output file whose format
 matches the distributed jobs:  anchor<TAB>other1:count1,other2:count2,...
