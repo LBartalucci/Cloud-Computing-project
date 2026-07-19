@@ -1,0 +1,98 @@
+openapi: 3.0.3
+info:
+  title: E-commerce Co-occurrence Recommender API
+  description: >
+    REST gateway that submits Hadoop MapReduce / Apache Spark / non-parallel
+    Python jobs to a distributed backend and exposes product recommendations
+    mined from session co-occurrence. Jobs run asynchronously.
+  version: 1.0.0
+servers:
+  - url: http://hadoop-namenode:5000
+paths:
+  /health:
+    get:
+      summary: Liveness probe
+      responses:
+        "200":
+          description: Server is up
+  /jobs:
+    get:
+      summary: List all submitted jobs
+      responses:
+        "200":
+          description: Array of job descriptors
+    post:
+      summary: Submit a new analytics job (asynchronous)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobRequest"
+      responses:
+        "202":
+          description: Job accepted; returns a job_id to poll
+        "400":
+          description: Invalid engine or dataset
+  /jobs/{job_id}:
+    get:
+      summary: Get job status, timing and parsed statistics
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Job descriptor}
+        "404": {description: Unknown job}
+  /jobs/{job_id}/log:
+    get:
+      summary: Get the captured job log (plain text)
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Log text}
+  /jobs/{job_id}/recommendations/{product}:
+    get:
+      summary: Top-N products co-occurring with the given product
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema: {type: string}
+        - name: product
+          in: path
+          required: true
+          schema: {type: integer}
+        - name: limit
+          in: query
+          schema: {type: integer, default: 10}
+      responses:
+        "200": {description: Recommendation list}
+        "404": {description: Unknown job or product}
+        "409": {description: Job not finished yet}
+components:
+  schemas:
+    JobRequest:
+      type: object
+      properties:
+        engine:
+          type: string
+          enum: [hadoop, spark, baseline]
+          default: hadoop
+        dataset:
+          type: string
+          enum: [dev, main]
+          default: dev
+        event_types:
+          type: string
+          default: "cart,purchase"
+        topn:
+          type: integer
+          default: 10
+        reducers:
+          type: integer
+          default: 2
