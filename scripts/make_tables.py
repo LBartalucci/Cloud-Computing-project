@@ -8,7 +8,7 @@ import csv
 import sys
 from collections import defaultdict
 
-path = sys.argv[1] if len(sys.argv) > 1 else "report/results/benchmark.csv"
+path = sys.argv[1] if len(sys.argv) > 1 else "../results/benchmark.csv"
 
 rows = []
 with open(path, newline="") as f:

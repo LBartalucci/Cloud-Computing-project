@@ -4,11 +4,10 @@
 # Results are appended incrementally to a CSV so partial progress is visible.
 #
 # Experiments:
-#   scaling      : {hadoop,spark,baseline} x {150,500,1000,1500} MB
-#   reducers     : hadoop on 1500 MB, reducers in {1,2,4}
-#   partitions   : spark  on 1500 MB, partitions in {2,4,8}
-# Source cluster env BEFORE strict mode (hadoop-env.sh references vars that may
-# be unbound). No -e/-u here: each run captures its own exit code.
+#  scaling      : {hadoop,spark,baseline} x {250,500,1000,1500} MB
+#  reducers     : hadoop on 1500 MB, reducers in {1,2,4}
+#  partitions   : spark  on 1500 MB, partitions in {2,4,8}
+
 source /home/hadoop/cc_ops/hadoop-env.sh 2>/dev/null || true
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export SPARK_HOME=${SPARK_HOME:-/opt/spark}
@@ -25,18 +24,16 @@ LOGDIR=/home/hadoop/cc_build/results/logs
 mkdir -p "$(dirname "$RESULTS")" "$LOGDIR"
 
 declare -A HDFS_IN=(
+  [250]=/user/hadoop/ecommerce/sizes/250MB
   [500]=/user/hadoop/ecommerce/sizes/500MB
   [1000]=/user/hadoop/ecommerce/sizes/1000MB
-  [1500]=/user/hadoop/ecommerce/sizes/1500MB
-  [2000]=/user/hadoop/ecommerce/sizes/2000MB
-  [2500]=/user/hadoop/ecommerce/sizes/2500MB )
+  [1500]=/user/hadoop/ecommerce/sizes/1500MB )
 
 declare -A LOCAL_IN=(
+  [250]=$DATA/2019-Oct-s250.csv
   [500]=$DATA/2019-Oct-s500.csv
   [1000]=$DATA/2019-Oct-s1000.csv
-  [1500]=$DATA/2019-Oct-main.csv
-  [2000]=$DATA/2019-Oct-s2000.csv
-  [2500]=$DATA/2019-Oct-s2500.csv )
+  [1500]=$DATA/2019-Oct-main.csv )
 
 if [ ! -f "$RESULTS" ]; then
   echo "experiment,engine,size_mb,param,wall_s,cpu_ms,phys_mem_mb,peak_rss_mb,sessions,pairs,anchors,exit" > "$RESULTS"
@@ -86,8 +83,6 @@ run_baseline() {  # experiment size
   rc=$?
   t1=$(date +%s.%N)
   wall=$(awk "BEGIN{printf \"%.1f\", $t1-$t0}")
-  # Parse the single summary line ("... sessions=.. pairs=.. anchors=..") to
-  # avoid matching the timing line which also contains "pairs=".
   local sum
   sum=$(grep -a "rows=" "$log" | head -1)
   rss=$(grep -a "peakRSS=" "$log" | head -1 | sed -E 's/.*peakRSS=([0-9]+)MB.*/\1/')
@@ -101,8 +96,7 @@ run_baseline() {  # experiment size
 echo "=== START $(date) ==="
 
 echo "--- Experiment A: scaling ---"
-
-for s in 500 1000 1500 2000 2500; do
+for s in 250 500 1000 1500; do
   run_hadoop scaling "$s" 2
   run_spark  scaling "$s" -
   run_baseline scaling "$s"
