@@ -24,10 +24,10 @@ LOGDIR=/home/hadoop/cc_build/results/logs
 mkdir -p "$(dirname "$RESULTS")" "$LOGDIR"
 
 declare -A HDFS_IN=(
-  [250]=/user/hadoop/ecommerce/sizes/250MB
-  [500]=/user/hadoop/ecommerce/sizes/500MB
-  [1000]=/user/hadoop/ecommerce/sizes/1000MB
-  [1500]=/user/hadoop/ecommerce/sizes/1500MB )
+  [250]=/user/hadoop/ecommerce/s250
+  [500]=/user/hadoop/ecommerce/s500
+  [1000]=/user/hadoop/ecommerce/s1000
+  [1500]=/user/hadoop/ecommerce/main )
 
 declare -A LOCAL_IN=(
   [250]=$DATA/2019-Oct-s250.csv
@@ -53,7 +53,7 @@ run_hadoop() {  # experiment size reducers
   wall=$(awk "BEGIN{printf \"%.1f\", $t1-$t0}")
   cpu=$(grep -a "CPU time spent (ms)" "$log" | awk -F= '{s+=$2} END{print s+0}')
   mem=$(grep -a "Physical memory (bytes) snapshot" "$log" | awk -F= '{if($2+0>m)m=$2} END{printf "%d", m/1048576}')
-  echo "$exp,hadoop,$size,reducers=$red,$wall,$cpu,$mem,,,,$rc" >> "$RESULTS"
+  echo "$exp,hadoop,$size,reducers=$red,$wall,$cpu,$mem,,,,,$rc" >> "$RESULTS"
   echo "[done] hadoop exp=$exp size=$size red=$red wall=${wall}s cpu=${cpu}ms mem=${mem}MB rc=$rc"
 }
 
@@ -70,7 +70,7 @@ run_spark() {  # experiment size partitions
   rc=$?
   t1=$(date +%s.%N)
   wall=$(awk "BEGIN{printf \"%.1f\", $t1-$t0}")
-  echo "$exp,spark,$size,parts=$parts,$wall,,,,,,$rc" >> "$RESULTS"
+  echo "$exp,spark,$size,parts=$parts,$wall,,,,,,,$rc" >> "$RESULTS"
   echo "[done] spark exp=$exp size=$size parts=$parts wall=${wall}s rc=$rc"
 }
 
