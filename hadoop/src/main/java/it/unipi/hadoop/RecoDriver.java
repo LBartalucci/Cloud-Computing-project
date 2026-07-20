@@ -13,13 +13,14 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-/**
- * Main Driver: Orchestrates the execution of Job 1 (SessionPairs) and Job 2 (Recommend).
- * 
- * Job 1 extracts session co-occurrences and writes intermediate results to <output>_stage1.
- * Job 2 processes the intermediate output to aggregate scores and extract the top-N recommendations,
- * saving the final result to the designated <output> path.
- */
+/*
+Main Driver: Orchestrates the execution of Job 1 (SessionPairs) and Job 2 (Recommend).
+
+Job 1 extracts session co-occurrences and writes intermediate results to <output>_stage1.
+
+Job 2 processes the intermediate output to aggregate scores and extract the top-N recommendations,
+saving the final result to the designated <output> path.
+*/
 
 public class RecoDriver extends Configured implements Tool {
 

@@ -3,12 +3,13 @@ package it.unipi.hadoop;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.mapreduce.Partitioner;
 
-/**
- * Custom partitioner for Job 2.
- * Routes all candidate pairs sharing the same anchor product ID to the exact same reducer.
- * Uses the built-in Writable hashCode masked with a bitwise AND to prevent negative partition indices,
- * ensuring uniform distribution across available reducers without risking OutOfBounds exceptions.
- */
+/*
+Custom partitioner for Job 2.
+Routes all candidate pairs sharing the same anchor product ID to the exact same reducer.
+
+Uses the built-in Writable hashCode masked with a bitwise AND to prevent negative partition indices,
+ensuring uniform distribution across available reducers without risking OutOfBounds exceptions.
+*/
 
 public class AnchorPartitioner extends Partitioner<LongWritable, ProductCountWritable> {
 

@@ -11,14 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-/**
- * Job 2 — Aggregation and top-N ranking.
- *
- * Map: Reads co-occurrence pairs from Job 1, parses the products and counts, 
- *      and emits two records per pair (acting as a symmetric graph: Anchor -> Candidate:Count).
- * Combine: Performs local pre-aggregation of counts per anchor to minimize network traffic.
- * Reduce: Performs global aggregation per anchor, isolates the top-N strongest candidates using 
- *         a bounded min-heap, and outputs the final recommendations with deterministic tie-breaking.
+/*
+Job 2 — Aggregation and top-N ranking.
+
+Map: Reads co-occurrence pairs from Job 1, parses the products and counts, 
+and emits two records per pair (acting as a symmetric graph: Anchor -> Candidate:Count).
+
+Combine: Performs local pre-aggregation of counts per anchor to minimize network traffic.
+
+Reduce: Performs global aggregation per anchor, isolates the top-N strongest candidates using 
+a bounded min-heap, and outputs the final recommendations with deterministic tie-breaking.
  */
 
 public final class Recommend {

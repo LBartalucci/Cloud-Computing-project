@@ -14,14 +14,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Job 1 — Session co-occurrence generation.
- *
- * Map: Inputs REES46 CSV rows, filters by configured event types and outputs (user_session -> product_id).
- * Reduce: Groups by session, extracts distinct products, sorts them to ensure deterministic pair generation,
- *         and emits (ProductPairWritable -> 1) for each unique pair.
- *         Sessions exceeding the maximum size threshold are skipped to filter out bot traffic.
- */
+/*
+Job 1 — Session co-occurrence generation.
+
+Map: Inputs REES46 CSV rows, filters by configured event types and outputs (user_session -> product_id).
+
+Reduce: Groups by session, extracts distinct products, sorts them to ensure deterministic pair generation,
+and emits (ProductPairWritable -> 1) for each unique pair.
+
+Sessions exceeding the maximum size threshold are skipped to filter out bot traffic.
+*/
 
 public final class SessionPairs {
 
