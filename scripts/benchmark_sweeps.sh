@@ -13,7 +13,7 @@ OUTBASE=/user/hadoop/ecommerce/bench
 RESULTS=${RESULTS:-/home/hadoop/cc_build/results/benchmark.csv}
 LOGDIR=/home/hadoop/cc_build/results/logs
 mkdir -p "$(dirname "$RESULTS")" "$LOGDIR"
-IN1500=/user/hadoop/ecommerce/sizes/1500MB
+IN1500=/user/hadoop/ecommerce/main
 
 run_hadoop() {  # experiment reducers
   local exp=$1 red=$2

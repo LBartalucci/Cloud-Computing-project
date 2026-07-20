@@ -109,7 +109,7 @@ def main():
     zero_value = []
 
     if num_parts:
-        top_recos = directed_pairs.aggregateByKey(zero_value, merge_value, merge_combiners, num_partitions=num_parts)
+        top_recos = directed_pairs.aggregateByKey(zero_value, merge_value, merge_combiners, numPartitions=num_parts)
     else:
         top_recos = directed_pairs.aggregateByKey(zero_value, merge_value, merge_combiners)
 

@@ -1,313 +1,312 @@
-2026-07-20 14:50:30,620 INFO spark.SparkContext: Running Spark version 3.4.4
-2026-07-20 14:50:31,002 INFO resource.ResourceUtils: ==============================================================
-2026-07-20 14:50:31,002 INFO resource.ResourceUtils: No custom resources configured for spark.driver.
-2026-07-20 14:50:31,003 INFO resource.ResourceUtils: ==============================================================
-2026-07-20 14:50:31,004 INFO spark.SparkContext: Submitted application: reco-spark-job
-2026-07-20 14:50:31,056 INFO resource.ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 512, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
-2026-07-20 14:50:31,086 INFO resource.ResourceProfile: Limiting resource is cpus at 1 tasks per executor
-2026-07-20 14:50:31,089 INFO resource.ResourceProfileManager: Added ResourceProfile id: 0
-2026-07-20 14:50:31,214 INFO spark.SecurityManager: Changing view acls to: hadoop
-2026-07-20 14:50:31,214 INFO spark.SecurityManager: Changing modify acls to: hadoop
-2026-07-20 14:50:31,215 INFO spark.SecurityManager: Changing view acls groups to: 
-2026-07-20 14:50:31,215 INFO spark.SecurityManager: Changing modify acls groups to: 
-2026-07-20 14:50:31,215 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
-2026-07-20 14:50:31,657 INFO util.Utils: Successfully started service 'sparkDriver' on port 41707.
-2026-07-20 14:50:31,732 INFO spark.SparkEnv: Registering MapOutputTracker
-2026-07-20 14:50:31,782 INFO spark.SparkEnv: Registering BlockManagerMaster
-2026-07-20 14:50:31,819 INFO storage.BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
-2026-07-20 14:50:31,819 INFO storage.BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
-2026-07-20 14:50:31,894 INFO spark.SparkEnv: Registering BlockManagerMasterHeartbeat
-2026-07-20 14:50:31,926 INFO storage.DiskBlockManager: Created local directory at /tmp/blockmgr-2823b011-d355-4491-8973-f5fa4518ccc1
-2026-07-20 14:50:31,957 INFO memory.MemoryStore: MemoryStore started with capacity 366.3 MiB
-2026-07-20 14:50:32,025 INFO spark.SparkEnv: Registering OutputCommitCoordinator
-2026-07-20 14:50:32,102 INFO util.log: Logging initialized @6417ms to org.sparkproject.jetty.util.log.Slf4jLog
-2026-07-20 14:50:32,257 INFO ui.JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
-2026-07-20 14:50:32,318 INFO server.Server: jetty-9.4.54.v20240208; built: 2024-02-08T19:42:39.027Z; git: cef3fbd6d736a21e7d541a5db490381d95a2047d; jvm 1.8.0_492-8u492-ga~us2-0ubuntu1~22.04.1-b09
-2026-07-20 14:50:32,350 INFO server.Server: Started @6666ms
-2026-07-20 14:50:32,403 INFO server.AbstractConnector: Started ServerConnector@7d0090ad{HTTP/1.1, (http/1.1)}{0.0.0.0:4040}
-2026-07-20 14:50:32,403 INFO util.Utils: Successfully started service 'SparkUI' on port 4040.
-2026-07-20 14:50:32,500 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@1d77067f{/,null,AVAILABLE,@Spark}
-2026-07-20 14:50:33,481 INFO client.RMProxy: Connecting to ResourceManager at hadoop-namenode/10.1.1.156:8032
-2026-07-20 14:50:35,178 INFO conf.Configuration: resource-types.xml not found
-2026-07-20 14:50:35,179 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
-2026-07-20 14:50:35,205 INFO yarn.Client: Verifying our application has not requested more than the maximum memory capability of the cluster (1536 MB per container)
-2026-07-20 14:50:35,205 INFO yarn.Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
-2026-07-20 14:50:35,206 INFO yarn.Client: Setting up container launch context for our AM
-2026-07-20 14:50:35,208 INFO yarn.Client: Setting up the launch environment for our AM container
-2026-07-20 14:50:35,218 INFO yarn.Client: Preparing resources for our AM container
-2026-07-20 14:50:35,270 WARN yarn.Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
-2026-07-20 14:50:41,373 INFO yarn.Client: Uploading resource file:/tmp/spark-94d71933-7625-49c6-94b4-f77b4cd4441d/__spark_libs__2158744855148576530.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0129/__spark_libs__2158744855148576530.zip
-2026-07-20 14:50:41,569 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
-2026-07-20 14:50:42,702 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
-2026-07-20 14:50:43,543 INFO yarn.Client: Uploading resource file:/opt/spark-3.4.4-bin-without-hadoop/python/lib/pyspark.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0129/pyspark.zip
-2026-07-20 14:50:43,581 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
-2026-07-20 14:50:43,615 INFO yarn.Client: Uploading resource file:/opt/spark-3.4.4-bin-without-hadoop/python/lib/py4j-0.10.9.7-src.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0129/py4j-0.10.9.7-src.zip
-2026-07-20 14:50:43,627 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
-2026-07-20 14:50:43,961 INFO yarn.Client: Uploading resource file:/tmp/spark-94d71933-7625-49c6-94b4-f77b4cd4441d/__spark_conf__5317150762431156286.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0129/__spark_conf__.zip
-2026-07-20 14:50:46,507 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
-2026-07-20 14:50:47,685 INFO spark.SecurityManager: Changing view acls to: hadoop
-2026-07-20 14:50:47,685 INFO spark.SecurityManager: Changing modify acls to: hadoop
-2026-07-20 14:50:47,688 INFO spark.SecurityManager: Changing view acls groups to: 
-2026-07-20 14:50:47,688 INFO spark.SecurityManager: Changing modify acls groups to: 
-2026-07-20 14:50:47,688 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
-2026-07-20 14:50:47,728 INFO yarn.Client: Submitting application application_1779436164025_0129 to ResourceManager
-2026-07-20 14:50:48,025 INFO impl.YarnClientImpl: Submitted application application_1779436164025_0129
-2026-07-20 14:50:49,033 INFO yarn.Client: Application report for application_1779436164025_0129 (state: ACCEPTED)
-2026-07-20 14:50:49,038 INFO yarn.Client: 
+2026-07-20 15:56:01,656 INFO spark.SparkContext: Running Spark version 3.4.4
+2026-07-20 15:56:01,974 INFO resource.ResourceUtils: ==============================================================
+2026-07-20 15:56:01,975 INFO resource.ResourceUtils: No custom resources configured for spark.driver.
+2026-07-20 15:56:01,975 INFO resource.ResourceUtils: ==============================================================
+2026-07-20 15:56:01,976 INFO spark.SparkContext: Submitted application: reco-spark-job
+2026-07-20 15:56:02,021 INFO resource.ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 512, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+2026-07-20 15:56:02,043 INFO resource.ResourceProfile: Limiting resource is cpus at 1 tasks per executor
+2026-07-20 15:56:02,046 INFO resource.ResourceProfileManager: Added ResourceProfile id: 0
+2026-07-20 15:56:02,165 INFO spark.SecurityManager: Changing view acls to: hadoop
+2026-07-20 15:56:02,166 INFO spark.SecurityManager: Changing modify acls to: hadoop
+2026-07-20 15:56:02,167 INFO spark.SecurityManager: Changing view acls groups to: 
+2026-07-20 15:56:02,167 INFO spark.SecurityManager: Changing modify acls groups to: 
+2026-07-20 15:56:02,168 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
+2026-07-20 15:56:02,573 INFO util.Utils: Successfully started service 'sparkDriver' on port 46801.
+2026-07-20 15:56:02,650 INFO spark.SparkEnv: Registering MapOutputTracker
+2026-07-20 15:56:02,702 INFO spark.SparkEnv: Registering BlockManagerMaster
+2026-07-20 15:56:02,739 INFO storage.BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+2026-07-20 15:56:02,740 INFO storage.BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+2026-07-20 15:56:02,798 INFO spark.SparkEnv: Registering BlockManagerMasterHeartbeat
+2026-07-20 15:56:02,832 INFO storage.DiskBlockManager: Created local directory at /tmp/blockmgr-5e73d01e-f609-4c41-85d9-ed29c8413b3d
+2026-07-20 15:56:02,858 INFO memory.MemoryStore: MemoryStore started with capacity 366.3 MiB
+2026-07-20 15:56:02,918 INFO spark.SparkEnv: Registering OutputCommitCoordinator
+2026-07-20 15:56:02,977 INFO util.log: Logging initialized @4172ms to org.sparkproject.jetty.util.log.Slf4jLog
+2026-07-20 15:56:03,124 INFO ui.JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+2026-07-20 15:56:03,143 INFO server.Server: jetty-9.4.54.v20240208; built: 2024-02-08T19:42:39.027Z; git: cef3fbd6d736a21e7d541a5db490381d95a2047d; jvm 1.8.0_492-8u492-ga~us2-0ubuntu1~22.04.1-b09
+2026-07-20 15:56:03,182 INFO server.Server: Started @4378ms
+2026-07-20 15:56:03,241 INFO server.AbstractConnector: Started ServerConnector@6b9bdbd{HTTP/1.1, (http/1.1)}{0.0.0.0:4040}
+2026-07-20 15:56:03,241 INFO util.Utils: Successfully started service 'SparkUI' on port 4040.
+2026-07-20 15:56:03,378 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@25a6cace{/,null,AVAILABLE,@Spark}
+2026-07-20 15:56:04,350 INFO client.RMProxy: Connecting to ResourceManager at hadoop-namenode/10.1.1.156:8032
+2026-07-20 15:56:06,104 INFO conf.Configuration: resource-types.xml not found
+2026-07-20 15:56:06,105 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2026-07-20 15:56:06,133 INFO yarn.Client: Verifying our application has not requested more than the maximum memory capability of the cluster (1536 MB per container)
+2026-07-20 15:56:06,134 INFO yarn.Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+2026-07-20 15:56:06,134 INFO yarn.Client: Setting up container launch context for our AM
+2026-07-20 15:56:06,137 INFO yarn.Client: Setting up the launch environment for our AM container
+2026-07-20 15:56:06,148 INFO yarn.Client: Preparing resources for our AM container
+2026-07-20 15:56:06,224 WARN yarn.Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
+2026-07-20 15:56:21,342 INFO yarn.Client: Uploading resource file:/tmp/spark-ed26fd79-355c-484f-b255-1344f9bb0abc/__spark_libs__7001318165334585746.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0171/__spark_libs__7001318165334585746.zip
+2026-07-20 15:56:21,559 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-20 15:56:22,784 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-20 15:56:23,677 INFO yarn.Client: Uploading resource file:/opt/spark-3.4.4-bin-without-hadoop/python/lib/pyspark.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0171/pyspark.zip
+2026-07-20 15:56:23,694 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-20 15:56:23,742 INFO yarn.Client: Uploading resource file:/opt/spark-3.4.4-bin-without-hadoop/python/lib/py4j-0.10.9.7-src.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0171/py4j-0.10.9.7-src.zip
+2026-07-20 15:56:23,750 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-20 15:56:23,984 INFO yarn.Client: Uploading resource file:/tmp/spark-ed26fd79-355c-484f-b255-1344f9bb0abc/__spark_conf__5389791039919824647.zip -> hdfs://hadoop-namenode:9820/user/hadoop/.sparkStaging/application_1779436164025_0171/__spark_conf__.zip
+2026-07-20 15:56:24,006 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-07-20 15:56:24,058 INFO spark.SecurityManager: Changing view acls to: hadoop
+2026-07-20 15:56:24,058 INFO spark.SecurityManager: Changing modify acls to: hadoop
+2026-07-20 15:56:24,059 INFO spark.SecurityManager: Changing view acls groups to: 
+2026-07-20 15:56:24,059 INFO spark.SecurityManager: Changing modify acls groups to: 
+2026-07-20 15:56:24,059 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: hadoop; groups with view permissions: EMPTY; users with modify permissions: hadoop; groups with modify permissions: EMPTY
+2026-07-20 15:56:24,091 INFO yarn.Client: Submitting application application_1779436164025_0171 to ResourceManager
+2026-07-20 15:56:24,306 INFO impl.YarnClientImpl: Submitted application application_1779436164025_0171
+2026-07-20 15:56:25,320 INFO yarn.Client: Application report for application_1779436164025_0171 (state: ACCEPTED)
+2026-07-20 15:56:25,329 INFO yarn.Client: 
 	 client token: N/A
 	 diagnostics: AM container is launched, waiting for AM container to Register with RM
 	 ApplicationMaster host: N/A
 	 ApplicationMaster RPC port: -1
 	 queue: default
-	 start time: 1784559047761
+	 start time: 1784562984254
 	 final status: UNDEFINED
-	 tracking URL: http://hadoop-namenode:8088/proxy/application_1779436164025_0129/
+	 tracking URL: http://hadoop-namenode:8088/proxy/application_1779436164025_0171/
 	 user: hadoop
-2026-07-20 14:50:50,043 INFO yarn.Client: Application report for application_1779436164025_0129 (state: ACCEPTED)
-2026-07-20 14:50:51,052 INFO yarn.Client: Application report for application_1779436164025_0129 (state: ACCEPTED)
-2026-07-20 14:50:52,055 INFO yarn.Client: Application report for application_1779436164025_0129 (state: ACCEPTED)
-2026-07-20 14:50:53,066 INFO yarn.Client: Application report for application_1779436164025_0129 (state: ACCEPTED)
-2026-07-20 14:50:54,069 INFO yarn.Client: Application report for application_1779436164025_0129 (state: ACCEPTED)
-2026-07-20 14:50:54,885 INFO cluster.YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> hadoop-namenode, PROXY_URI_BASES -> http://hadoop-namenode:8088/proxy/application_1779436164025_0129), /proxy/application_1779436164025_0129
-2026-07-20 14:50:55,081 INFO yarn.Client: Application report for application_1779436164025_0129 (state: RUNNING)
-2026-07-20 14:50:55,081 INFO yarn.Client: 
+2026-07-20 15:56:26,334 INFO yarn.Client: Application report for application_1779436164025_0171 (state: ACCEPTED)
+2026-07-20 15:56:27,340 INFO yarn.Client: Application report for application_1779436164025_0171 (state: ACCEPTED)
+2026-07-20 15:56:28,344 INFO yarn.Client: Application report for application_1779436164025_0171 (state: ACCEPTED)
+2026-07-20 15:56:29,347 INFO yarn.Client: Application report for application_1779436164025_0171 (state: ACCEPTED)
+2026-07-20 15:56:30,143 INFO cluster.YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> hadoop-namenode, PROXY_URI_BASES -> http://hadoop-namenode:8088/proxy/application_1779436164025_0171), /proxy/application_1779436164025_0171
+2026-07-20 15:56:30,352 INFO yarn.Client: Application report for application_1779436164025_0171 (state: RUNNING)
+2026-07-20 15:56:30,353 INFO yarn.Client: 
 	 client token: N/A
 	 diagnostics: N/A
-	 ApplicationMaster host: 10.1.1.156
+	 ApplicationMaster host: 10.1.1.150
 	 ApplicationMaster RPC port: -1
 	 queue: default
-	 start time: 1784559047761
+	 start time: 1784562984254
 	 final status: UNDEFINED
-	 tracking URL: http://hadoop-namenode:8088/proxy/application_1779436164025_0129/
+	 tracking URL: http://hadoop-namenode:8088/proxy/application_1779436164025_0171/
 	 user: hadoop
-2026-07-20 14:50:55,085 INFO cluster.YarnClientSchedulerBackend: Application application_1779436164025_0129 has started running.
-2026-07-20 14:50:55,122 INFO util.Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 34095.
-2026-07-20 14:50:55,124 INFO netty.NettyBlockTransferService: Server created on hadoop-namenode:34095
-2026-07-20 14:50:55,127 INFO storage.BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
-2026-07-20 14:50:55,146 INFO storage.BlockManagerMaster: Registering BlockManager BlockManagerId(driver, hadoop-namenode, 34095, None)
-2026-07-20 14:50:55,156 INFO storage.BlockManagerMasterEndpoint: Registering block manager hadoop-namenode:34095 with 366.3 MiB RAM, BlockManagerId(driver, hadoop-namenode, 34095, None)
-2026-07-20 14:50:55,163 INFO storage.BlockManagerMaster: Registered BlockManager BlockManagerId(driver, hadoop-namenode, 34095, None)
-2026-07-20 14:50:55,165 INFO storage.BlockManager: Initialized BlockManager: BlockManagerId(driver, hadoop-namenode, 34095, None)
-2026-07-20 14:50:55,557 INFO handler.ContextHandler: Stopped o.s.j.s.ServletContextHandler@1d77067f{/,null,STOPPED,@Spark}
-2026-07-20 14:50:55,559 INFO ui.ServerInfo: Adding filter to /jobs: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,568 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@618d5f19{/jobs,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,570 INFO ui.ServerInfo: Adding filter to /jobs/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,571 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@7b9f1cb9{/jobs/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,571 INFO ui.ServerInfo: Adding filter to /jobs/job: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,573 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@7e4b820d{/jobs/job,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,573 INFO ui.ServerInfo: Adding filter to /jobs/job/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,574 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@20aae1b4{/jobs/job/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,574 INFO ui.ServerInfo: Adding filter to /stages: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,575 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@585da733{/stages,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,575 INFO ui.ServerInfo: Adding filter to /stages/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,576 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@67ef1ec1{/stages/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,576 INFO ui.ServerInfo: Adding filter to /stages/stage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,578 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3dd01416{/stages/stage,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,578 INFO ui.ServerInfo: Adding filter to /stages/stage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,579 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@e3c119{/stages/stage/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,579 INFO ui.ServerInfo: Adding filter to /stages/pool: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,580 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6a08e49c{/stages/pool,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,580 INFO ui.ServerInfo: Adding filter to /stages/pool/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,581 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@507c3cbd{/stages/pool/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,582 INFO ui.ServerInfo: Adding filter to /storage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,582 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@48ac372a{/storage,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,583 INFO ui.ServerInfo: Adding filter to /storage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,584 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@4d0f8c2{/storage/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,584 INFO ui.ServerInfo: Adding filter to /storage/rdd: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,585 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@76449f74{/storage/rdd,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,585 INFO ui.ServerInfo: Adding filter to /storage/rdd/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,586 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@dac7b98{/storage/rdd/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,586 INFO ui.ServerInfo: Adding filter to /environment: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,587 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3ed1ec49{/environment,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,587 INFO ui.ServerInfo: Adding filter to /environment/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,588 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@31b0c5f8{/environment/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,588 INFO ui.ServerInfo: Adding filter to /executors: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,589 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@46236cc0{/executors,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,592 INFO ui.ServerInfo: Adding filter to /executors/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,596 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@478e95e5{/executors/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,596 INFO ui.ServerInfo: Adding filter to /executors/threadDump: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,598 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@22a51b0d{/executors/threadDump,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,598 INFO ui.ServerInfo: Adding filter to /executors/threadDump/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,599 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@2d15b9de{/executors/threadDump/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,599 INFO ui.ServerInfo: Adding filter to /static: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,616 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6e18815d{/static,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,616 INFO ui.ServerInfo: Adding filter to /: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,619 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6e4ce218{/,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,620 INFO ui.ServerInfo: Adding filter to /api: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,626 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@e0bfb2{/api,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,627 INFO ui.ServerInfo: Adding filter to /jobs/job/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,630 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@8f384d8{/jobs/job/kill,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,632 INFO ui.ServerInfo: Adding filter to /stages/stage/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,634 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@77946bab{/stages/stage/kill,null,AVAILABLE,@Spark}
-2026-07-20 14:50:55,642 INFO ui.ServerInfo: Adding filter to /metrics/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
-2026-07-20 14:50:55,643 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@25708673{/metrics/json,null,AVAILABLE,@Spark}
-2026-07-20 14:50:57,200 INFO cluster.YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
-2026-07-20 14:51:03,184 INFO cluster.YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after waiting maxRegisteredResourcesWaitingTime: 30000000000(ns)
-2026-07-20 14:51:03,359 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (10.1.1.150:49228) with ID 1,  ResourceProfileId 0
-2026-07-20 14:51:03,449 INFO memory.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 312.0 B, free 366.3 MiB)
-2026-07-20 14:51:03,500 INFO memory.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 227.0 B, free 366.3 MiB)
-2026-07-20 14:51:03,503 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on hadoop-namenode:34095 (size: 227.0 B, free: 366.3 MiB)
-2026-07-20 14:51:03,514 INFO spark.SparkContext: Created broadcast 0 from broadcast at NativeMethodAccessorImpl.java:0
-2026-07-20 14:51:03,573 INFO storage.BlockManagerMasterEndpoint: Registering block manager hadoop-datanode-2:36613 with 93.3 MiB RAM, BlockManagerId(1, hadoop-datanode-2, 36613, None)
-2026-07-20 14:51:03,952 INFO memory.MemoryStore: Block broadcast_1 stored as values in memory (estimated size 389.2 KiB, free 365.9 MiB)
-2026-07-20 14:51:03,976 INFO memory.MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 40.4 KiB, free 365.9 MiB)
-2026-07-20 14:51:03,977 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on hadoop-namenode:34095 (size: 40.4 KiB, free: 366.3 MiB)
-2026-07-20 14:51:03,978 INFO spark.SparkContext: Created broadcast 1 from textFile at NativeMethodAccessorImpl.java:0
-2026-07-20 14:51:04,189 INFO mapred.FileInputFormat: Total input files to process : 1
-2026-07-20 14:51:04,505 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
-2026-07-20 14:51:04,530 INFO io.HadoopMapRedCommitProtocol: Using output committer class org.apache.hadoop.mapred.FileOutputCommitter
-2026-07-20 14:51:04,532 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 1
-2026-07-20 14:51:04,532 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
-2026-07-20 14:51:04,570 INFO spark.SparkContext: Starting job: runJob at SparkHadoopWriter.scala:83
-2026-07-20 14:51:04,618 INFO scheduler.DAGScheduler: Registering RDD 3 (groupByKey at /home/hadoop/cc_build/spark/reco_spark.py:87) as input to shuffle 2
-2026-07-20 14:51:04,624 INFO scheduler.DAGScheduler: Registering RDD 7 (reduceByKey at /home/hadoop/cc_build/spark/reco_spark.py:89) as input to shuffle 1
-2026-07-20 14:51:04,625 INFO scheduler.DAGScheduler: Registering RDD 11 (aggregateByKey at /home/hadoop/cc_build/spark/reco_spark.py:114) as input to shuffle 0
-2026-07-20 14:51:04,628 INFO scheduler.DAGScheduler: Got job 0 (runJob at SparkHadoopWriter.scala:83) with 8 output partitions
-2026-07-20 14:51:04,629 INFO scheduler.DAGScheduler: Final stage: ResultStage 3 (runJob at SparkHadoopWriter.scala:83)
-2026-07-20 14:51:04,629 INFO scheduler.DAGScheduler: Parents of final stage: List(ShuffleMapStage 2)
-2026-07-20 14:51:04,633 INFO scheduler.DAGScheduler: Missing parents: List(ShuffleMapStage 2)
-2026-07-20 14:51:04,650 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 0 (PairwiseRDD[3] at groupByKey at /home/hadoop/cc_build/spark/reco_spark.py:87), which has no missing parents
-2026-07-20 14:51:04,797 INFO memory.MemoryStore: Block broadcast_2 stored as values in memory (estimated size 13.6 KiB, free 365.9 MiB)
-2026-07-20 14:51:04,800 INFO memory.MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 8.2 KiB, free 365.9 MiB)
-2026-07-20 14:51:04,801 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on hadoop-namenode:34095 (size: 8.2 KiB, free: 366.3 MiB)
-2026-07-20 14:51:04,802 INFO spark.SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:1540
-2026-07-20 14:51:04,822 INFO scheduler.DAGScheduler: Submitting 8 missing tasks from ShuffleMapStage 0 (PairwiseRDD[3] at groupByKey at /home/hadoop/cc_build/spark/reco_spark.py:87) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
-2026-07-20 14:51:04,824 INFO cluster.YarnScheduler: Adding task set 0.0 with 8 tasks resource profile 0
-2026-07-20 14:51:04,911 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (hadoop-datanode-2, executor 1, partition 0, NODE_LOCAL, 8837 bytes) 
-2026-07-20 14:51:05,337 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on hadoop-datanode-2:36613 (size: 8.2 KiB, free: 93.3 MiB)
-2026-07-20 14:51:06,051 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on hadoop-datanode-2:36613 (size: 40.4 KiB, free: 93.3 MiB)
-2026-07-20 14:51:08,158 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on hadoop-datanode-2:36613 (size: 227.0 B, free: 93.3 MiB)
-2026-07-20 14:51:08,199 INFO storage.BlockManagerInfo: Added broadcast_0_python on disk on hadoop-datanode-2:36613 (size: 34.0 B)
-2026-07-20 14:51:12,210 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1) (hadoop-datanode-2, executor 1, partition 1, NODE_LOCAL, 8837 bytes) 
-2026-07-20 14:51:12,228 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 7339 ms on hadoop-datanode-2 (executor 1) (1/8)
-2026-07-20 14:51:12,244 INFO python.PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 46121
-2026-07-20 14:51:18,441 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 0.0 (TID 2) (hadoop-datanode-2, executor 1, partition 2, NODE_LOCAL, 8837 bytes) 
-2026-07-20 14:51:18,444 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 6235 ms on hadoop-datanode-2 (executor 1) (2/8)
-2026-07-20 14:51:21,424 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 0.0 (TID 3) (hadoop-datanode-2, executor 1, partition 3, NODE_LOCAL, 8837 bytes) 
-2026-07-20 14:51:21,429 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 0.0 (TID 2) in 2990 ms on hadoop-datanode-2 (executor 1) (3/8)
-2026-07-20 14:51:24,520 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 0.0 (TID 4) (hadoop-datanode-2, executor 1, partition 4, NODE_LOCAL, 8837 bytes) 
-2026-07-20 14:51:24,522 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 0.0 (TID 3) in 3099 ms on hadoop-datanode-2 (executor 1) (4/8)
-2026-07-20 14:51:27,562 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 0.0 (TID 4) in 3046 ms on hadoop-datanode-2 (executor 1) (5/8)
-2026-07-20 14:51:27,564 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 0.0 (TID 5) (hadoop-datanode-2, executor 1, partition 5, NODE_LOCAL, 8837 bytes) 
-2026-07-20 14:51:30,430 INFO scheduler.TaskSetManager: Starting task 6.0 in stage 0.0 (TID 6) (hadoop-datanode-2, executor 1, partition 6, NODE_LOCAL, 8837 bytes) 
-2026-07-20 14:51:30,431 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 0.0 (TID 5) in 2868 ms on hadoop-datanode-2 (executor 1) (6/8)
-2026-07-20 14:51:33,301 INFO scheduler.TaskSetManager: Starting task 7.0 in stage 0.0 (TID 7) (hadoop-datanode-2, executor 1, partition 7, NODE_LOCAL, 8837 bytes) 
-2026-07-20 14:51:33,311 INFO scheduler.TaskSetManager: Finished task 6.0 in stage 0.0 (TID 6) in 2882 ms on hadoop-datanode-2 (executor 1) (7/8)
-2026-07-20 14:51:35,644 INFO scheduler.TaskSetManager: Finished task 7.0 in stage 0.0 (TID 7) in 2345 ms on hadoop-datanode-2 (executor 1) (8/8)
-2026-07-20 14:51:35,645 INFO cluster.YarnScheduler: Removed TaskSet 0.0, whose tasks have all completed, from pool 
-2026-07-20 14:51:35,648 INFO scheduler.DAGScheduler: ShuffleMapStage 0 (groupByKey at /home/hadoop/cc_build/spark/reco_spark.py:87) finished in 30.941 s
-2026-07-20 14:51:35,654 INFO scheduler.DAGScheduler: looking for newly runnable stages
-2026-07-20 14:51:35,655 INFO scheduler.DAGScheduler: running: Set()
-2026-07-20 14:51:35,655 INFO scheduler.DAGScheduler: waiting: Set(ShuffleMapStage 1, ShuffleMapStage 2, ResultStage 3)
-2026-07-20 14:51:35,655 INFO scheduler.DAGScheduler: failed: Set()
-2026-07-20 14:51:35,659 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 1 (PairwiseRDD[7] at reduceByKey at /home/hadoop/cc_build/spark/reco_spark.py:89), which has no missing parents
-2026-07-20 14:51:35,678 INFO memory.MemoryStore: Block broadcast_3 stored as values in memory (estimated size 13.5 KiB, free 365.8 MiB)
-2026-07-20 14:51:35,681 INFO memory.MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 7.9 KiB, free 365.8 MiB)
-2026-07-20 14:51:35,682 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on hadoop-namenode:34095 (size: 7.9 KiB, free: 366.2 MiB)
-2026-07-20 14:51:35,682 INFO spark.SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:1540
-2026-07-20 14:51:35,685 INFO scheduler.DAGScheduler: Submitting 8 missing tasks from ShuffleMapStage 1 (PairwiseRDD[7] at reduceByKey at /home/hadoop/cc_build/spark/reco_spark.py:89) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
-2026-07-20 14:51:35,685 INFO cluster.YarnScheduler: Adding task set 1.0 with 8 tasks resource profile 0
-2026-07-20 14:51:35,689 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 1.0 (TID 8) (hadoop-datanode-2, executor 1, partition 0, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:35,728 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on hadoop-datanode-2:36613 (size: 7.9 KiB, free: 93.2 MiB)
-2026-07-20 14:51:35,770 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 2 to 10.1.1.150:49228
-2026-07-20 14:51:36,133 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 1.0 (TID 9) (hadoop-datanode-2, executor 1, partition 1, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:36,136 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 1.0 (TID 8) in 447 ms on hadoop-datanode-2 (executor 1) (1/8)
-2026-07-20 14:51:36,374 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 1.0 (TID 10) (hadoop-datanode-2, executor 1, partition 2, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:36,377 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 1.0 (TID 9) in 244 ms on hadoop-datanode-2 (executor 1) (2/8)
-2026-07-20 14:51:36,626 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 1.0 (TID 11) (hadoop-datanode-2, executor 1, partition 3, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:36,629 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 1.0 (TID 10) in 256 ms on hadoop-datanode-2 (executor 1) (3/8)
-2026-07-20 14:51:36,894 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 1.0 (TID 12) (hadoop-datanode-2, executor 1, partition 4, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:36,897 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 1.0 (TID 11) in 272 ms on hadoop-datanode-2 (executor 1) (4/8)
-2026-07-20 14:51:37,153 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 1.0 (TID 13) (hadoop-datanode-2, executor 1, partition 5, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:37,156 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 1.0 (TID 12) in 263 ms on hadoop-datanode-2 (executor 1) (5/8)
-2026-07-20 14:51:37,375 INFO scheduler.TaskSetManager: Starting task 6.0 in stage 1.0 (TID 14) (hadoop-datanode-2, executor 1, partition 6, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:37,377 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 1.0 (TID 13) in 226 ms on hadoop-datanode-2 (executor 1) (6/8)
-2026-07-20 14:51:37,616 INFO scheduler.TaskSetManager: Starting task 7.0 in stage 1.0 (TID 15) (hadoop-datanode-2, executor 1, partition 7, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:37,620 INFO scheduler.TaskSetManager: Finished task 6.0 in stage 1.0 (TID 14) in 246 ms on hadoop-datanode-2 (executor 1) (7/8)
-2026-07-20 14:51:37,847 INFO scheduler.TaskSetManager: Finished task 7.0 in stage 1.0 (TID 15) in 231 ms on hadoop-datanode-2 (executor 1) (8/8)
-2026-07-20 14:51:37,847 INFO cluster.YarnScheduler: Removed TaskSet 1.0, whose tasks have all completed, from pool 
-2026-07-20 14:51:37,851 INFO scheduler.DAGScheduler: ShuffleMapStage 1 (reduceByKey at /home/hadoop/cc_build/spark/reco_spark.py:89) finished in 2.179 s
-2026-07-20 14:51:37,852 INFO scheduler.DAGScheduler: looking for newly runnable stages
-2026-07-20 14:51:37,852 INFO scheduler.DAGScheduler: running: Set()
-2026-07-20 14:51:37,852 INFO scheduler.DAGScheduler: waiting: Set(ShuffleMapStage 2, ResultStage 3)
-2026-07-20 14:51:37,852 INFO scheduler.DAGScheduler: failed: Set()
-2026-07-20 14:51:37,855 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 2 (PairwiseRDD[11] at aggregateByKey at /home/hadoop/cc_build/spark/reco_spark.py:114), which has no missing parents
-2026-07-20 14:51:37,864 INFO memory.MemoryStore: Block broadcast_4 stored as values in memory (estimated size 13.2 KiB, free 365.8 MiB)
-2026-07-20 14:51:37,884 INFO memory.MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 7.7 KiB, free 365.8 MiB)
-2026-07-20 14:51:37,886 INFO storage.BlockManagerInfo: Added broadcast_4_piece0 in memory on hadoop-namenode:34095 (size: 7.7 KiB, free: 366.2 MiB)
-2026-07-20 14:51:37,888 INFO spark.SparkContext: Created broadcast 4 from broadcast at DAGScheduler.scala:1540
-2026-07-20 14:51:37,889 INFO scheduler.DAGScheduler: Submitting 8 missing tasks from ShuffleMapStage 2 (PairwiseRDD[11] at aggregateByKey at /home/hadoop/cc_build/spark/reco_spark.py:114) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
-2026-07-20 14:51:37,889 INFO cluster.YarnScheduler: Adding task set 2.0 with 8 tasks resource profile 0
-2026-07-20 14:51:37,900 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 2.0 (TID 16) (hadoop-datanode-2, executor 1, partition 0, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:37,927 INFO storage.BlockManagerInfo: Added broadcast_4_piece0 in memory on hadoop-datanode-2:36613 (size: 7.7 KiB, free: 93.2 MiB)
-2026-07-20 14:51:37,933 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 1 to 10.1.1.150:49228
-2026-07-20 14:51:38,119 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 2.0 (TID 17) (hadoop-datanode-2, executor 1, partition 1, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:38,123 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 2.0 (TID 16) in 224 ms on hadoop-datanode-2 (executor 1) (1/8)
-2026-07-20 14:51:38,322 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 2.0 (TID 18) (hadoop-datanode-2, executor 1, partition 2, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:38,325 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 2.0 (TID 17) in 207 ms on hadoop-datanode-2 (executor 1) (2/8)
-2026-07-20 14:51:38,522 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 2.0 (TID 19) (hadoop-datanode-2, executor 1, partition 3, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:38,523 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 2.0 (TID 18) in 202 ms on hadoop-datanode-2 (executor 1) (3/8)
-2026-07-20 14:51:38,728 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 2.0 (TID 20) (hadoop-datanode-2, executor 1, partition 4, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:38,730 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 2.0 (TID 19) in 209 ms on hadoop-datanode-2 (executor 1) (4/8)
-2026-07-20 14:51:38,909 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 2.0 (TID 20) in 182 ms on hadoop-datanode-2 (executor 1) (5/8)
-2026-07-20 14:51:38,912 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 2.0 (TID 21) (hadoop-datanode-2, executor 1, partition 5, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:39,091 INFO scheduler.TaskSetManager: Starting task 6.0 in stage 2.0 (TID 22) (hadoop-datanode-2, executor 1, partition 6, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:39,093 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 2.0 (TID 21) in 182 ms on hadoop-datanode-2 (executor 1) (6/8)
-2026-07-20 14:51:39,281 INFO scheduler.TaskSetManager: Starting task 7.0 in stage 2.0 (TID 23) (hadoop-datanode-2, executor 1, partition 7, NODE_LOCAL, 8565 bytes) 
-2026-07-20 14:51:39,285 INFO scheduler.TaskSetManager: Finished task 6.0 in stage 2.0 (TID 22) in 195 ms on hadoop-datanode-2 (executor 1) (7/8)
-2026-07-20 14:51:39,464 INFO scheduler.TaskSetManager: Finished task 7.0 in stage 2.0 (TID 23) in 184 ms on hadoop-datanode-2 (executor 1) (8/8)
-2026-07-20 14:51:39,465 INFO cluster.YarnScheduler: Removed TaskSet 2.0, whose tasks have all completed, from pool 
-2026-07-20 14:51:39,468 INFO scheduler.DAGScheduler: ShuffleMapStage 2 (aggregateByKey at /home/hadoop/cc_build/spark/reco_spark.py:114) finished in 1.606 s
-2026-07-20 14:51:39,468 INFO scheduler.DAGScheduler: looking for newly runnable stages
-2026-07-20 14:51:39,468 INFO scheduler.DAGScheduler: running: Set()
-2026-07-20 14:51:39,468 INFO scheduler.DAGScheduler: waiting: Set(ResultStage 3)
-2026-07-20 14:51:39,468 INFO scheduler.DAGScheduler: failed: Set()
-2026-07-20 14:51:39,469 INFO scheduler.DAGScheduler: Submitting ResultStage 3 (MapPartitionsRDD[16] at saveAsTextFile at NativeMethodAccessorImpl.java:0), which has no missing parents
-2026-07-20 14:51:39,496 INFO memory.MemoryStore: Block broadcast_5 stored as values in memory (estimated size 127.0 KiB, free 365.7 MiB)
-2026-07-20 14:51:39,500 INFO memory.MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 49.0 KiB, free 365.6 MiB)
-2026-07-20 14:51:39,501 INFO storage.BlockManagerInfo: Added broadcast_5_piece0 in memory on hadoop-namenode:34095 (size: 49.0 KiB, free: 366.2 MiB)
-2026-07-20 14:51:39,502 INFO spark.SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:1540
-2026-07-20 14:51:39,504 INFO scheduler.DAGScheduler: Submitting 8 missing tasks from ResultStage 3 (MapPartitionsRDD[16] at saveAsTextFile at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
-2026-07-20 14:51:39,505 INFO cluster.YarnScheduler: Adding task set 3.0 with 8 tasks resource profile 0
-2026-07-20 14:51:39,509 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 3.0 (TID 24) (hadoop-datanode-2, executor 1, partition 0, NODE_LOCAL, 8576 bytes) 
-2026-07-20 14:51:39,532 INFO storage.BlockManagerInfo: Added broadcast_5_piece0 in memory on hadoop-datanode-2:36613 (size: 49.0 KiB, free: 93.2 MiB)
-2026-07-20 14:51:39,605 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 10.1.1.150:49228
-2026-07-20 14:51:39,957 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 3.0 (TID 25) (hadoop-datanode-2, executor 1, partition 1, NODE_LOCAL, 8576 bytes) 
-2026-07-20 14:51:39,963 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 3.0 (TID 24) in 456 ms on hadoop-datanode-2 (executor 1) (1/8)
-2026-07-20 14:51:40,193 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 3.0 (TID 26) (hadoop-datanode-2, executor 1, partition 2, NODE_LOCAL, 8576 bytes) 
-2026-07-20 14:51:40,196 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 3.0 (TID 25) in 244 ms on hadoop-datanode-2 (executor 1) (2/8)
-2026-07-20 14:51:40,421 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 3.0 (TID 27) (hadoop-datanode-2, executor 1, partition 3, NODE_LOCAL, 8576 bytes) 
-2026-07-20 14:51:40,425 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 3.0 (TID 26) in 234 ms on hadoop-datanode-2 (executor 1) (3/8)
-2026-07-20 14:51:40,628 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 3.0 (TID 28) (hadoop-datanode-2, executor 1, partition 4, NODE_LOCAL, 8576 bytes) 
-2026-07-20 14:51:40,632 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 3.0 (TID 27) in 211 ms on hadoop-datanode-2 (executor 1) (4/8)
-2026-07-20 14:51:40,834 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 3.0 (TID 29) (hadoop-datanode-2, executor 1, partition 5, NODE_LOCAL, 8576 bytes) 
-2026-07-20 14:51:40,837 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 3.0 (TID 28) in 210 ms on hadoop-datanode-2 (executor 1) (5/8)
-2026-07-20 14:51:41,044 INFO scheduler.TaskSetManager: Starting task 6.0 in stage 3.0 (TID 30) (hadoop-datanode-2, executor 1, partition 6, NODE_LOCAL, 8576 bytes) 
-2026-07-20 14:51:41,046 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 3.0 (TID 29) in 213 ms on hadoop-datanode-2 (executor 1) (6/8)
-2026-07-20 14:51:41,266 INFO scheduler.TaskSetManager: Starting task 7.0 in stage 3.0 (TID 31) (hadoop-datanode-2, executor 1, partition 7, NODE_LOCAL, 8576 bytes) 
-2026-07-20 14:51:41,271 INFO scheduler.TaskSetManager: Finished task 6.0 in stage 3.0 (TID 30) in 227 ms on hadoop-datanode-2 (executor 1) (7/8)
-2026-07-20 14:51:41,452 INFO scheduler.TaskSetManager: Finished task 7.0 in stage 3.0 (TID 31) in 186 ms on hadoop-datanode-2 (executor 1) (8/8)
-2026-07-20 14:51:41,452 INFO cluster.YarnScheduler: Removed TaskSet 3.0, whose tasks have all completed, from pool 
-2026-07-20 14:51:41,456 INFO scheduler.DAGScheduler: ResultStage 3 (runJob at SparkHadoopWriter.scala:83) finished in 1.978 s
-2026-07-20 14:51:41,472 INFO scheduler.DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
-2026-07-20 14:51:41,472 INFO cluster.YarnScheduler: Killing all running tasks in stage 3: Stage finished
-2026-07-20 14:51:41,477 INFO scheduler.DAGScheduler: Job 0 finished: runJob at SparkHadoopWriter.scala:83, took 36.906278 s
-2026-07-20 14:51:41,483 INFO io.SparkHadoopWriter: Start to commit write Job job_202607201451045419990946592928244_0016.
-2026-07-20 14:51:41,553 INFO io.SparkHadoopWriter: Write Job job_202607201451045419990946592928244_0016 committed. Elapsed time: 68 ms.
-2026-07-20 14:51:41,555 INFO spark.SparkContext: SparkContext is stopping with exitCode 0.
-2026-07-20 14:51:41,574 INFO server.AbstractConnector: Stopped Spark@7d0090ad{HTTP/1.1, (http/1.1)}{0.0.0.0:4040}
-2026-07-20 14:51:41,579 INFO ui.SparkUI: Stopped Spark web UI at http://hadoop-namenode:4040
-2026-07-20 14:51:41,606 INFO cluster.YarnClientSchedulerBackend: Interrupting monitor thread
-2026-07-20 14:51:41,687 INFO cluster.YarnClientSchedulerBackend: Shutting down all executors
-2026-07-20 14:51:41,688 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Asking each executor to shut down
-2026-07-20 14:51:41,696 INFO cluster.YarnClientSchedulerBackend: YARN client scheduler backend Stopped
-2026-07-20 14:51:41,722 INFO spark.MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
-2026-07-20 14:51:41,754 INFO memory.MemoryStore: MemoryStore cleared
-2026-07-20 14:51:41,755 INFO storage.BlockManager: BlockManager stopped
-2026-07-20 14:51:41,769 INFO storage.BlockManagerMaster: BlockManagerMaster stopped
-2026-07-20 14:51:41,773 INFO scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
-2026-07-20 14:51:41,809 INFO spark.SparkContext: Successfully stopped SparkContext
-2026-07-20 14:51:42,522 INFO util.ShutdownHookManager: Shutdown hook called
-2026-07-20 14:51:42,524 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-94d71933-7625-49c6-94b4-f77b4cd4441d/pyspark-adb24c21-d950-42d4-83be-307de2a18b70
-2026-07-20 14:51:42,529 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-3b78f92f-fa0b-4554-9502-7f92ee9785c6
-2026-07-20 14:51:42,533 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-94d71933-7625-49c6-94b4-f77b4cd4441d
+2026-07-20 15:56:30,358 INFO cluster.YarnClientSchedulerBackend: Application application_1779436164025_0171 has started running.
+2026-07-20 15:56:30,393 INFO util.Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 41911.
+2026-07-20 15:56:30,394 INFO netty.NettyBlockTransferService: Server created on hadoop-namenode:41911
+2026-07-20 15:56:30,397 INFO storage.BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+2026-07-20 15:56:30,413 INFO storage.BlockManagerMaster: Registering BlockManager BlockManagerId(driver, hadoop-namenode, 41911, None)
+2026-07-20 15:56:30,421 INFO storage.BlockManagerMasterEndpoint: Registering block manager hadoop-namenode:41911 with 366.3 MiB RAM, BlockManagerId(driver, hadoop-namenode, 41911, None)
+2026-07-20 15:56:30,425 INFO storage.BlockManagerMaster: Registered BlockManager BlockManagerId(driver, hadoop-namenode, 41911, None)
+2026-07-20 15:56:30,427 INFO storage.BlockManager: Initialized BlockManager: BlockManagerId(driver, hadoop-namenode, 41911, None)
+2026-07-20 15:56:30,768 INFO handler.ContextHandler: Stopped o.s.j.s.ServletContextHandler@25a6cace{/,null,STOPPED,@Spark}
+2026-07-20 15:56:30,769 INFO ui.ServerInfo: Adding filter to /jobs: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,777 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@24540d43{/jobs,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,777 INFO ui.ServerInfo: Adding filter to /jobs/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,778 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@60d79e93{/jobs/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,779 INFO ui.ServerInfo: Adding filter to /jobs/job: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,780 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3184e28a{/jobs/job,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,780 INFO ui.ServerInfo: Adding filter to /jobs/job/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,781 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@1ab1b1a0{/jobs/job/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,781 INFO ui.ServerInfo: Adding filter to /stages: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,782 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@11e8f6f5{/stages,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,782 INFO ui.ServerInfo: Adding filter to /stages/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,783 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@2b0417f6{/stages/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,784 INFO ui.ServerInfo: Adding filter to /stages/stage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,785 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@59088df9{/stages/stage,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,785 INFO ui.ServerInfo: Adding filter to /stages/stage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,787 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@5b85bc37{/stages/stage/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,787 INFO ui.ServerInfo: Adding filter to /stages/pool: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,788 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@7346d81c{/stages/pool,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,788 INFO ui.ServerInfo: Adding filter to /stages/pool/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,789 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@4bc89656{/stages/pool/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,789 INFO ui.ServerInfo: Adding filter to /storage: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,790 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@ed857be{/storage,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,790 INFO ui.ServerInfo: Adding filter to /storage/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,791 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@47f063df{/storage/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,791 INFO ui.ServerInfo: Adding filter to /storage/rdd: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,792 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@7baf709f{/storage/rdd,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,793 INFO ui.ServerInfo: Adding filter to /storage/rdd/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,793 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@74ac5e16{/storage/rdd/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,794 INFO ui.ServerInfo: Adding filter to /environment: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,795 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@5d5243b{/environment,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,795 INFO ui.ServerInfo: Adding filter to /environment/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,796 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@39507ed3{/environment/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,796 INFO ui.ServerInfo: Adding filter to /executors: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,797 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@5cc49398{/executors,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,798 INFO ui.ServerInfo: Adding filter to /executors/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,799 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@12ebc539{/executors/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,799 INFO ui.ServerInfo: Adding filter to /executors/threadDump: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,801 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@955060{/executors/threadDump,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,802 INFO ui.ServerInfo: Adding filter to /executors/threadDump/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,803 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@27e9144d{/executors/threadDump/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,804 INFO ui.ServerInfo: Adding filter to /static: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,837 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6d330145{/static,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,838 INFO ui.ServerInfo: Adding filter to /: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,844 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@3b97f40d{/,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,844 INFO ui.ServerInfo: Adding filter to /api: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,849 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@6b53aa0{/api,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,849 INFO ui.ServerInfo: Adding filter to /jobs/job/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,851 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@41c04128{/jobs/job/kill,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,851 INFO ui.ServerInfo: Adding filter to /stages/stage/kill: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,853 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@a847549{/stages/stage/kill,null,AVAILABLE,@Spark}
+2026-07-20 15:56:30,860 INFO ui.ServerInfo: Adding filter to /metrics/json: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+2026-07-20 15:56:30,861 INFO handler.ContextHandler: Started o.s.j.s.ServletContextHandler@281ed430{/metrics/json,null,AVAILABLE,@Spark}
+2026-07-20 15:56:31,169 INFO cluster.YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(spark-client://YarnAM)
+2026-07-20 15:56:34,070 INFO cluster.YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after waiting maxRegisteredResourcesWaitingTime: 30000000000(ns)
+2026-07-20 15:56:34,396 INFO memory.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 312.0 B, free 366.3 MiB)
+2026-07-20 15:56:34,452 INFO memory.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 227.0 B, free 366.3 MiB)
+2026-07-20 15:56:34,456 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on hadoop-namenode:41911 (size: 227.0 B, free: 366.3 MiB)
+2026-07-20 15:56:34,465 INFO spark.SparkContext: Created broadcast 0 from broadcast at NativeMethodAccessorImpl.java:0
+2026-07-20 15:56:35,043 INFO memory.MemoryStore: Block broadcast_1 stored as values in memory (estimated size 389.2 KiB, free 365.9 MiB)
+2026-07-20 15:56:35,094 INFO memory.MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 40.4 KiB, free 365.9 MiB)
+2026-07-20 15:56:35,101 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on hadoop-namenode:41911 (size: 40.4 KiB, free: 366.3 MiB)
+2026-07-20 15:56:35,102 INFO spark.SparkContext: Created broadcast 1 from textFile at NativeMethodAccessorImpl.java:0
+2026-07-20 15:56:35,411 INFO mapred.FileInputFormat: Total input files to process : 1
+2026-07-20 15:56:35,801 INFO Configuration.deprecation: mapred.output.dir is deprecated. Instead, use mapreduce.output.fileoutputformat.outputdir
+2026-07-20 15:56:35,813 INFO io.HadoopMapRedCommitProtocol: Using output committer class org.apache.hadoop.mapred.FileOutputCommitter
+2026-07-20 15:56:35,815 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 1
+2026-07-20 15:56:35,815 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+2026-07-20 15:56:35,887 INFO spark.SparkContext: Starting job: runJob at SparkHadoopWriter.scala:83
+2026-07-20 15:56:36,088 INFO scheduler.DAGScheduler: Registering RDD 3 (groupByKey at /home/hadoop/cc_build/spark/reco_spark.py:87) as input to shuffle 2
+2026-07-20 15:56:36,107 INFO scheduler.DAGScheduler: Registering RDD 7 (reduceByKey at /home/hadoop/cc_build/spark/reco_spark.py:89) as input to shuffle 1
+2026-07-20 15:56:36,108 INFO scheduler.DAGScheduler: Registering RDD 11 (aggregateByKey at /home/hadoop/cc_build/spark/reco_spark.py:114) as input to shuffle 0
+2026-07-20 15:56:36,116 INFO scheduler.DAGScheduler: Got job 0 (runJob at SparkHadoopWriter.scala:83) with 8 output partitions
+2026-07-20 15:56:36,118 INFO scheduler.DAGScheduler: Final stage: ResultStage 3 (runJob at SparkHadoopWriter.scala:83)
+2026-07-20 15:56:36,120 INFO scheduler.DAGScheduler: Parents of final stage: List(ShuffleMapStage 2)
+2026-07-20 15:56:36,130 INFO scheduler.DAGScheduler: Missing parents: List(ShuffleMapStage 2)
+2026-07-20 15:56:36,162 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 0 (PairwiseRDD[3] at groupByKey at /home/hadoop/cc_build/spark/reco_spark.py:87), which has no missing parents
+2026-07-20 15:56:36,469 INFO memory.MemoryStore: Block broadcast_2 stored as values in memory (estimated size 13.6 KiB, free 365.9 MiB)
+2026-07-20 15:56:36,476 INFO memory.MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 8.2 KiB, free 365.9 MiB)
+2026-07-20 15:56:36,480 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on hadoop-namenode:41911 (size: 8.2 KiB, free: 366.3 MiB)
+2026-07-20 15:56:36,481 INFO spark.SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:1540
+2026-07-20 15:56:36,547 INFO scheduler.DAGScheduler: Submitting 8 missing tasks from ShuffleMapStage 0 (PairwiseRDD[3] at groupByKey at /home/hadoop/cc_build/spark/reco_spark.py:87) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
+2026-07-20 15:56:36,549 INFO cluster.YarnScheduler: Adding task set 0.0 with 8 tasks resource profile 0
+2026-07-20 15:56:40,251 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (10.1.1.156:46064) with ID 1,  ResourceProfileId 0
+2026-07-20 15:56:40,448 INFO storage.BlockManagerMasterEndpoint: Registering block manager hadoop-namenode:44001 with 93.3 MiB RAM, BlockManagerId(1, hadoop-namenode, 44001, None)
+2026-07-20 15:56:40,587 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (hadoop-namenode, executor 1, partition 0, NODE_LOCAL, 8837 bytes) 
+2026-07-20 15:56:41,259 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on hadoop-namenode:44001 (size: 8.2 KiB, free: 93.3 MiB)
+2026-07-20 15:56:43,008 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on hadoop-namenode:44001 (size: 40.4 KiB, free: 93.3 MiB)
+2026-07-20 15:56:44,991 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on hadoop-namenode:44001 (size: 227.0 B, free: 93.3 MiB)
+2026-07-20 15:56:45,032 INFO storage.BlockManagerInfo: Added broadcast_0_python on disk on hadoop-namenode:44001 (size: 34.0 B)
+2026-07-20 15:56:49,194 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1) (hadoop-namenode, executor 1, partition 1, NODE_LOCAL, 8837 bytes) 
+2026-07-20 15:56:49,228 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 8684 ms on hadoop-namenode (executor 1) (1/8)
+2026-07-20 15:56:49,266 INFO python.PythonAccumulatorV2: Connected to AccumulatorServer at host: 127.0.0.1 port: 47343
+2026-07-20 15:56:52,308 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 0.0 (TID 2) (hadoop-namenode, executor 1, partition 2, NODE_LOCAL, 8837 bytes) 
+2026-07-20 15:56:52,319 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 3127 ms on hadoop-namenode (executor 1) (2/8)
+2026-07-20 15:56:55,505 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 0.0 (TID 3) (hadoop-namenode, executor 1, partition 3, NODE_LOCAL, 8837 bytes) 
+2026-07-20 15:56:55,508 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 0.0 (TID 2) in 3202 ms on hadoop-namenode (executor 1) (3/8)
+2026-07-20 15:56:58,682 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 0.0 (TID 4) (hadoop-namenode, executor 1, partition 4, NODE_LOCAL, 8837 bytes) 
+2026-07-20 15:56:58,689 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 0.0 (TID 3) in 3185 ms on hadoop-namenode (executor 1) (4/8)
+2026-07-20 15:57:01,864 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 0.0 (TID 5) (hadoop-namenode, executor 1, partition 5, NODE_LOCAL, 8837 bytes) 
+2026-07-20 15:57:01,866 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 0.0 (TID 4) in 3185 ms on hadoop-namenode (executor 1) (5/8)
+2026-07-20 15:57:04,860 INFO scheduler.TaskSetManager: Starting task 6.0 in stage 0.0 (TID 6) (hadoop-namenode, executor 1, partition 6, NODE_LOCAL, 8837 bytes) 
+2026-07-20 15:57:04,862 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 0.0 (TID 5) in 2999 ms on hadoop-namenode (executor 1) (6/8)
+2026-07-20 15:57:07,906 INFO scheduler.TaskSetManager: Starting task 7.0 in stage 0.0 (TID 7) (hadoop-namenode, executor 1, partition 7, NODE_LOCAL, 8837 bytes) 
+2026-07-20 15:57:07,911 INFO scheduler.TaskSetManager: Finished task 6.0 in stage 0.0 (TID 6) in 3052 ms on hadoop-namenode (executor 1) (7/8)
+2026-07-20 15:57:10,594 INFO scheduler.TaskSetManager: Finished task 7.0 in stage 0.0 (TID 7) in 2689 ms on hadoop-namenode (executor 1) (8/8)
+2026-07-20 15:57:10,602 INFO scheduler.DAGScheduler: ShuffleMapStage 0 (groupByKey at /home/hadoop/cc_build/spark/reco_spark.py:87) finished in 34.350 s
+2026-07-20 15:57:10,595 INFO cluster.YarnScheduler: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+2026-07-20 15:57:10,608 INFO scheduler.DAGScheduler: looking for newly runnable stages
+2026-07-20 15:57:10,608 INFO scheduler.DAGScheduler: running: Set()
+2026-07-20 15:57:10,608 INFO scheduler.DAGScheduler: waiting: Set(ShuffleMapStage 1, ShuffleMapStage 2, ResultStage 3)
+2026-07-20 15:57:10,609 INFO scheduler.DAGScheduler: failed: Set()
+2026-07-20 15:57:10,614 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 1 (PairwiseRDD[7] at reduceByKey at /home/hadoop/cc_build/spark/reco_spark.py:89), which has no missing parents
+2026-07-20 15:57:10,635 INFO memory.MemoryStore: Block broadcast_3 stored as values in memory (estimated size 13.5 KiB, free 365.8 MiB)
+2026-07-20 15:57:10,639 INFO memory.MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 7.9 KiB, free 365.8 MiB)
+2026-07-20 15:57:10,640 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on hadoop-namenode:41911 (size: 7.9 KiB, free: 366.2 MiB)
+2026-07-20 15:57:10,642 INFO spark.SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:1540
+2026-07-20 15:57:10,644 INFO scheduler.DAGScheduler: Submitting 8 missing tasks from ShuffleMapStage 1 (PairwiseRDD[7] at reduceByKey at /home/hadoop/cc_build/spark/reco_spark.py:89) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
+2026-07-20 15:57:10,644 INFO cluster.YarnScheduler: Adding task set 1.0 with 8 tasks resource profile 0
+2026-07-20 15:57:10,647 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 1.0 (TID 8) (hadoop-namenode, executor 1, partition 0, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:10,674 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on hadoop-namenode:44001 (size: 7.9 KiB, free: 93.2 MiB)
+2026-07-20 15:57:10,730 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 2 to 10.1.1.156:46064
+2026-07-20 15:57:11,139 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 1.0 (TID 9) (hadoop-namenode, executor 1, partition 1, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:11,144 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 1.0 (TID 8) in 498 ms on hadoop-namenode (executor 1) (1/8)
+2026-07-20 15:57:11,400 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 1.0 (TID 10) (hadoop-namenode, executor 1, partition 2, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:11,401 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 1.0 (TID 9) in 263 ms on hadoop-namenode (executor 1) (2/8)
+2026-07-20 15:57:11,709 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 1.0 (TID 11) (hadoop-namenode, executor 1, partition 3, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:11,713 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 1.0 (TID 10) in 313 ms on hadoop-namenode (executor 1) (3/8)
+2026-07-20 15:57:11,993 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 1.0 (TID 12) (hadoop-namenode, executor 1, partition 4, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:11,995 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 1.0 (TID 11) in 286 ms on hadoop-namenode (executor 1) (4/8)
+2026-07-20 15:57:12,272 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 1.0 (TID 13) (hadoop-namenode, executor 1, partition 5, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:12,275 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 1.0 (TID 12) in 282 ms on hadoop-namenode (executor 1) (5/8)
+2026-07-20 15:57:12,520 INFO scheduler.TaskSetManager: Starting task 6.0 in stage 1.0 (TID 14) (hadoop-namenode, executor 1, partition 6, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:12,522 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 1.0 (TID 13) in 251 ms on hadoop-namenode (executor 1) (6/8)
+2026-07-20 15:57:12,768 INFO scheduler.TaskSetManager: Starting task 7.0 in stage 1.0 (TID 15) (hadoop-namenode, executor 1, partition 7, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:12,771 INFO scheduler.TaskSetManager: Finished task 6.0 in stage 1.0 (TID 14) in 252 ms on hadoop-namenode (executor 1) (7/8)
+2026-07-20 15:57:13,018 INFO scheduler.TaskSetManager: Finished task 7.0 in stage 1.0 (TID 15) in 250 ms on hadoop-namenode (executor 1) (8/8)
+2026-07-20 15:57:13,020 INFO scheduler.DAGScheduler: ShuffleMapStage 1 (reduceByKey at /home/hadoop/cc_build/spark/reco_spark.py:89) finished in 2.394 s
+2026-07-20 15:57:13,020 INFO scheduler.DAGScheduler: looking for newly runnable stages
+2026-07-20 15:57:13,020 INFO scheduler.DAGScheduler: running: Set()
+2026-07-20 15:57:13,020 INFO scheduler.DAGScheduler: waiting: Set(ShuffleMapStage 2, ResultStage 3)
+2026-07-20 15:57:13,021 INFO scheduler.DAGScheduler: failed: Set()
+2026-07-20 15:57:13,021 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 2 (PairwiseRDD[11] at aggregateByKey at /home/hadoop/cc_build/spark/reco_spark.py:114), which has no missing parents
+2026-07-20 15:57:13,026 INFO cluster.YarnScheduler: Removed TaskSet 1.0, whose tasks have all completed, from pool 
+2026-07-20 15:57:13,034 INFO memory.MemoryStore: Block broadcast_4 stored as values in memory (estimated size 13.2 KiB, free 365.8 MiB)
+2026-07-20 15:57:13,041 INFO memory.MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 7.7 KiB, free 365.8 MiB)
+2026-07-20 15:57:13,042 INFO storage.BlockManagerInfo: Added broadcast_4_piece0 in memory on hadoop-namenode:41911 (size: 7.7 KiB, free: 366.2 MiB)
+2026-07-20 15:57:13,043 INFO spark.SparkContext: Created broadcast 4 from broadcast at DAGScheduler.scala:1540
+2026-07-20 15:57:13,044 INFO scheduler.DAGScheduler: Submitting 8 missing tasks from ShuffleMapStage 2 (PairwiseRDD[11] at aggregateByKey at /home/hadoop/cc_build/spark/reco_spark.py:114) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
+2026-07-20 15:57:13,045 INFO cluster.YarnScheduler: Adding task set 2.0 with 8 tasks resource profile 0
+2026-07-20 15:57:13,047 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 2.0 (TID 16) (hadoop-namenode, executor 1, partition 0, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:13,072 INFO storage.BlockManagerInfo: Added broadcast_4_piece0 in memory on hadoop-namenode:44001 (size: 7.7 KiB, free: 93.2 MiB)
+2026-07-20 15:57:13,080 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 1 to 10.1.1.156:46064
+2026-07-20 15:57:13,258 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 2.0 (TID 17) (hadoop-namenode, executor 1, partition 1, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:13,260 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 2.0 (TID 16) in 213 ms on hadoop-namenode (executor 1) (1/8)
+2026-07-20 15:57:13,452 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 2.0 (TID 18) (hadoop-namenode, executor 1, partition 2, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:13,454 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 2.0 (TID 17) in 197 ms on hadoop-namenode (executor 1) (2/8)
+2026-07-20 15:57:13,624 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 2.0 (TID 19) (hadoop-namenode, executor 1, partition 3, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:13,626 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 2.0 (TID 18) in 175 ms on hadoop-namenode (executor 1) (3/8)
+2026-07-20 15:57:13,841 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 2.0 (TID 20) (hadoop-namenode, executor 1, partition 4, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:13,842 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 2.0 (TID 19) in 219 ms on hadoop-namenode (executor 1) (4/8)
+2026-07-20 15:57:14,029 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 2.0 (TID 21) (hadoop-namenode, executor 1, partition 5, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:14,031 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 2.0 (TID 20) in 191 ms on hadoop-namenode (executor 1) (5/8)
+2026-07-20 15:57:14,243 INFO scheduler.TaskSetManager: Starting task 6.0 in stage 2.0 (TID 22) (hadoop-namenode, executor 1, partition 6, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:14,245 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 2.0 (TID 21) in 217 ms on hadoop-namenode (executor 1) (6/8)
+2026-07-20 15:57:14,425 INFO scheduler.TaskSetManager: Starting task 7.0 in stage 2.0 (TID 23) (hadoop-namenode, executor 1, partition 7, NODE_LOCAL, 8565 bytes) 
+2026-07-20 15:57:14,426 INFO scheduler.TaskSetManager: Finished task 6.0 in stage 2.0 (TID 22) in 184 ms on hadoop-namenode (executor 1) (7/8)
+2026-07-20 15:57:14,622 INFO scheduler.TaskSetManager: Finished task 7.0 in stage 2.0 (TID 23) in 198 ms on hadoop-namenode (executor 1) (8/8)
+2026-07-20 15:57:14,622 INFO cluster.YarnScheduler: Removed TaskSet 2.0, whose tasks have all completed, from pool 
+2026-07-20 15:57:14,624 INFO scheduler.DAGScheduler: ShuffleMapStage 2 (aggregateByKey at /home/hadoop/cc_build/spark/reco_spark.py:114) finished in 1.594 s
+2026-07-20 15:57:14,625 INFO scheduler.DAGScheduler: looking for newly runnable stages
+2026-07-20 15:57:14,625 INFO scheduler.DAGScheduler: running: Set()
+2026-07-20 15:57:14,625 INFO scheduler.DAGScheduler: waiting: Set(ResultStage 3)
+2026-07-20 15:57:14,625 INFO scheduler.DAGScheduler: failed: Set()
+2026-07-20 15:57:14,626 INFO scheduler.DAGScheduler: Submitting ResultStage 3 (MapPartitionsRDD[16] at saveAsTextFile at NativeMethodAccessorImpl.java:0), which has no missing parents
+2026-07-20 15:57:14,657 INFO memory.MemoryStore: Block broadcast_5 stored as values in memory (estimated size 127.0 KiB, free 365.7 MiB)
+2026-07-20 15:57:14,663 INFO memory.MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 49.0 KiB, free 365.6 MiB)
+2026-07-20 15:57:14,664 INFO storage.BlockManagerInfo: Added broadcast_5_piece0 in memory on hadoop-namenode:41911 (size: 49.0 KiB, free: 366.2 MiB)
+2026-07-20 15:57:14,666 INFO spark.SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:1540
+2026-07-20 15:57:14,673 INFO scheduler.DAGScheduler: Submitting 8 missing tasks from ResultStage 3 (MapPartitionsRDD[16] at saveAsTextFile at NativeMethodAccessorImpl.java:0) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
+2026-07-20 15:57:14,673 INFO cluster.YarnScheduler: Adding task set 3.0 with 8 tasks resource profile 0
+2026-07-20 15:57:14,680 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 3.0 (TID 24) (hadoop-namenode, executor 1, partition 0, NODE_LOCAL, 8576 bytes) 
+2026-07-20 15:57:14,713 INFO storage.BlockManagerInfo: Added broadcast_5_piece0 in memory on hadoop-namenode:44001 (size: 49.0 KiB, free: 93.2 MiB)
+2026-07-20 15:57:14,777 INFO spark.MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 10.1.1.156:46064
+2026-07-20 15:57:15,201 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 3.0 (TID 25) (hadoop-namenode, executor 1, partition 1, NODE_LOCAL, 8576 bytes) 
+2026-07-20 15:57:15,207 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 3.0 (TID 24) in 529 ms on hadoop-namenode (executor 1) (1/8)
+2026-07-20 15:57:15,405 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 3.0 (TID 26) (hadoop-namenode, executor 1, partition 2, NODE_LOCAL, 8576 bytes) 
+2026-07-20 15:57:15,405 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 3.0 (TID 25) in 205 ms on hadoop-namenode (executor 1) (2/8)
+2026-07-20 15:57:15,620 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 3.0 (TID 27) (hadoop-namenode, executor 1, partition 3, NODE_LOCAL, 8576 bytes) 
+2026-07-20 15:57:15,621 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 3.0 (TID 26) in 216 ms on hadoop-namenode (executor 1) (3/8)
+2026-07-20 15:57:15,882 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 3.0 (TID 28) (hadoop-namenode, executor 1, partition 4, NODE_LOCAL, 8576 bytes) 
+2026-07-20 15:57:15,891 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 3.0 (TID 27) in 272 ms on hadoop-namenode (executor 1) (4/8)
+2026-07-20 15:57:16,078 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 3.0 (TID 29) (hadoop-namenode, executor 1, partition 5, NODE_LOCAL, 8576 bytes) 
+2026-07-20 15:57:16,084 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 3.0 (TID 28) in 203 ms on hadoop-namenode (executor 1) (5/8)
+2026-07-20 15:57:16,296 INFO scheduler.TaskSetManager: Starting task 6.0 in stage 3.0 (TID 30) (hadoop-namenode, executor 1, partition 6, NODE_LOCAL, 8576 bytes) 
+2026-07-20 15:57:16,297 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 3.0 (TID 29) in 220 ms on hadoop-namenode (executor 1) (6/8)
+2026-07-20 15:57:16,577 INFO scheduler.TaskSetManager: Starting task 7.0 in stage 3.0 (TID 31) (hadoop-namenode, executor 1, partition 7, NODE_LOCAL, 8576 bytes) 
+2026-07-20 15:57:16,578 INFO scheduler.TaskSetManager: Finished task 6.0 in stage 3.0 (TID 30) in 283 ms on hadoop-namenode (executor 1) (7/8)
+2026-07-20 15:57:16,797 INFO scheduler.TaskSetManager: Finished task 7.0 in stage 3.0 (TID 31) in 220 ms on hadoop-namenode (executor 1) (8/8)
+2026-07-20 15:57:16,797 INFO cluster.YarnScheduler: Removed TaskSet 3.0, whose tasks have all completed, from pool 
+2026-07-20 15:57:16,800 INFO scheduler.DAGScheduler: ResultStage 3 (runJob at SparkHadoopWriter.scala:83) finished in 2.167 s
+2026-07-20 15:57:16,812 INFO scheduler.DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
+2026-07-20 15:57:16,812 INFO cluster.YarnScheduler: Killing all running tasks in stage 3: Stage finished
+2026-07-20 15:57:16,819 INFO scheduler.DAGScheduler: Job 0 finished: runJob at SparkHadoopWriter.scala:83, took 40.931803 s
+2026-07-20 15:57:16,825 INFO io.SparkHadoopWriter: Start to commit write Job job_202607201556356046010528370884828_0016.
+2026-07-20 15:57:16,901 INFO io.SparkHadoopWriter: Write Job job_202607201556356046010528370884828_0016 committed. Elapsed time: 74 ms.
+2026-07-20 15:57:16,903 INFO spark.SparkContext: SparkContext is stopping with exitCode 0.
+2026-07-20 15:57:16,918 INFO server.AbstractConnector: Stopped Spark@6b9bdbd{HTTP/1.1, (http/1.1)}{0.0.0.0:4040}
+2026-07-20 15:57:16,923 INFO ui.SparkUI: Stopped Spark web UI at http://hadoop-namenode:4040
+2026-07-20 15:57:16,939 INFO cluster.YarnClientSchedulerBackend: Interrupting monitor thread
+2026-07-20 15:57:17,009 INFO cluster.YarnClientSchedulerBackend: Shutting down all executors
+2026-07-20 15:57:17,013 INFO cluster.YarnSchedulerBackend$YarnDriverEndpoint: Asking each executor to shut down
+2026-07-20 15:57:17,029 INFO cluster.YarnClientSchedulerBackend: YARN client scheduler backend Stopped
+2026-07-20 15:57:17,051 INFO spark.MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+2026-07-20 15:57:17,104 INFO memory.MemoryStore: MemoryStore cleared
+2026-07-20 15:57:17,105 INFO storage.BlockManager: BlockManager stopped
+2026-07-20 15:57:17,132 INFO storage.BlockManagerMaster: BlockManagerMaster stopped
+2026-07-20 15:57:17,138 INFO scheduler.OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+2026-07-20 15:57:17,175 INFO spark.SparkContext: Successfully stopped SparkContext
+2026-07-20 15:57:17,869 INFO util.ShutdownHookManager: Shutdown hook called
+2026-07-20 15:57:17,870 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-ed26fd79-355c-484f-b255-1344f9bb0abc
+2026-07-20 15:57:17,876 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-ed26fd79-355c-484f-b255-1344f9bb0abc/pyspark-269ed072-aabe-4481-a164-e48f14d511e8
+2026-07-20 15:57:17,881 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-d73c8617-4dcc-49fb-b489-3cc7dcaf0723
