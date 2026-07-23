@@ -21,3 +21,4 @@ public class AnchorPartitioner extends Partitioner<LongWritable, ProductCountWri
         return (key.hashCode() & 0x7fffffff) % numPartitions;
     }
 }
+

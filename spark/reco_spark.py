@@ -81,11 +81,13 @@ def main():
     raw_data = sc.textFile(in_path)
     session_items = raw_data.map(parse_row).filter(lambda x: x is not None)
 
+    # Group by session id
     if num_parts:
         grouped_sessions = session_items.groupByKey(num_parts)
     else:
         grouped_sessions = session_items.groupByKey()
 
+    # Generate ((A,B) , 1) pairs from grouped session  
     pair_freq = grouped_sessions.flatMap(lambda kv: get_pairs(kv[1])).reduceByKey(add)
 
     # --- STAGE 2: Top-N recommendation ranking ---
@@ -108,6 +110,7 @@ def main():
 
     zero_value = []
 
+    # Aggregate and counts locally and then combines globally
     if num_parts:
         top_recos = directed_pairs.aggregateByKey(zero_value, merge_value, merge_combiners, numPartitions=num_parts)
     else:
